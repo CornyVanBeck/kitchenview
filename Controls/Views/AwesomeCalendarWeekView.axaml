@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" 
+             x:Class="kitchenview.Controls.Views.AwesomeCalendarWeekView">
+  <StackPanel Orientation="Horizontal">    
+      <Panel Classes="CalendarWeekIndicator">
+        <Border IsEnabled="{Binding IsCurrent}"/>
+        <TextBlock Text="{Binding CalendarWeek}" IsEnabled="{Binding IsCurrent}">
+          <TextBlock.RenderTransform>
+            <RotateTransform Angle="-90" CenterX="10" CenterY="-50"/>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+      </Panel>
+    <Border Classes="ActiveCalendarWeek" IsEnabled="{Binding IsCurrent}">
+      <ItemsControl Items="{Binding Days}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Horizontal"/>
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+              <Border Width="140" Height="140" Classes="CalendarDay">
+                <StackPanel>
+                  <TextBlock Text="{Binding DayOfMonth}" IsEnabled="{Binding IsEnabled}" />
+                  <ListBox Items="{Binding Appointments}">
+                      <ListBox.ItemTemplate>
+                          <DataTemplate>
+                            <Border Classes="Appointment" Width="136">
+                              <TextBlock Text="{Binding Title}"/>
+                            </Border>
+                          </DataTemplate>
+                      </ListBox.ItemTemplate>
+                  </ListBox>
+                </StackPanel>
+              </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </Border>
+  </StackPanel>
+</UserControl>

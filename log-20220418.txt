@@ -1,0 +1,4 @@
+2022-04-18 21:23:13.817 +02:00 [ERR] Error while parsing ICS data into calendar
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at kitchenview.DataAccess.IcsCalendarDataAccess.CallIcsData() in /home/david/Documents/csharp_projects/d-generation/kitchenview/DataAccess/IcsCalendarDataAccess.cs:line 54
+   at kitchenview.DataAccess.IcsCalendarDataAccess.GetData() in /home/david/Documents/csharp_projects/d-generation/kitchenview/DataAccess/IcsCalendarDataAccess.cs:line 36

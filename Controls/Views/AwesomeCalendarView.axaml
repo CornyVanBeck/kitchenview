@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:local="using:kitchenview.Controls.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="kitchenview.Controls.Views.AwesomeCalendarView">
+  <StackPanel HorizontalAlignment="Center">
+    <TextBlock Text="{Binding CurrentMonth}" FontSize="24"/> 
+      <ItemsControl Items="{Binding Weeks}">             
+          <ItemsControl.ItemTemplate>                      
+            <DataTemplate>
+              <local:AwesomeCalendarWeekView />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+      </ItemsControl>
+  </StackPanel>
+</UserControl>
