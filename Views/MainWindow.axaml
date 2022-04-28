@@ -20,18 +20,17 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         
-        <UserControl Content="{Binding AwesomeCalendar}" Grid.Column="0" Grid.Row="0" 
-        Grid.RowSpan="3" />
+        <UserControl Content="{Binding AwesomeCalendar}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
 
-        <TextBlock Grid.Row="0" Grid.Column="1">Quote of the day</TextBlock>
+        <UserControl Content="{Binding Quote}" Grid.Row="0" Grid.Column="1" />
         <TextBlock Grid.Row="1" Grid.Column="1">Alexa List</TextBlock>
         <TextBlock Grid.Row="2" Grid.Column="1">Some Gallery</TextBlock>
     </Grid>

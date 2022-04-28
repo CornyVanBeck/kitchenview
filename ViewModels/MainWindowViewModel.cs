@@ -17,11 +17,15 @@ namespace kitchenview.ViewModels
 
         public AwesomeCalendarViewModel AwesomeCalendar { get; }
 
+        public QuoteViewModel Quote { get; }
+
         public MainWindowViewModel(IConfiguration configuration)
         {
             this.configuration = configuration;
-            var services = Locator.Current.GetServices<IDataAccess<Appointment>>();
-            AwesomeCalendar = new AwesomeCalendarViewModel(configuration, services.Where(service => service is IcsCalendarDataAccess).FirstOrDefault()!);
+            var calendarService = Locator.Current.GetService<IDataAccess<Appointment>>();
+            var quoteService = Locator.Current.GetService<IDataAccess<IQuote>>();
+            AwesomeCalendar = new AwesomeCalendarViewModel(configuration, calendarService!);
+            Quote = new QuoteViewModel(configuration, quoteService!);
         }
     }
 }

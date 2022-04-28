@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style Selector="Window">
         <Setter Property="Background" Value="#333"/>
-        <Setter Property="FontFamily" Value="Source Sans Pro"/>
+        <Setter Property="FontFamily" Value="Ubuntu Thin"/>
         <Setter Property="FontWeight" Value="Light"/>
     </Style>
 
@@ -82,5 +82,52 @@
     <Style Selector="Border.Appointment TextBlock">
         <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="white"/>
+    </Style>
+
+    <Style Selector="Border.Quote">
+        <Setter Property="BoxShadow" Value="5 5 10 2 #222"/>
+        <Setter Property="BorderBrush">
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Offset="0" Color="#00d2ff" />
+                  <GradientStop Offset="1" Color="#c300ff" />
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+        </Setter>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Margin" Value="10 10 10 10"/>
+        <Setter Property="Background">
+            <LinearGradientBrush StartPoint="100%,0%" EndPoint="100%,100%">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Offset="0" Color="#FFF" />
+                  <GradientStop Offset="1" Color="#EFEFEF" />
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+        </Setter>
+        <Setter Property="MaxHeight" Value="400"/>
+        <Setter Property="CornerRadius" Value="50 0 50 0"/>
+    </Style>
+
+    <Style Selector="StackPanel.Quote">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style Selector="TextBlock.Quote">
+        <Setter Property="FontFamily" Value="Ubuntu Thin"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10 10 50 10"/>
+        <Setter Property="Foreground" Value="#333"/>
+    </Style>
+
+    <Style Selector="TextBlock.Author">
+        <Setter Property="FontFamily" Value="Ubuntu Thin"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="TextAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0 0 10 0"/>
+        <Setter Property="Foreground" Value="#333"/>
     </Style>
 </Styles>

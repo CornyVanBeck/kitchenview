@@ -43,6 +43,7 @@ namespace kitchenview
         {
             Locator.CurrentMutable.UseSerilogFullLogger();
             Locator.CurrentMutable.RegisterConstant<IDataAccess<Appointment>>(new IcsCalendarDataAccess(configuration, client));
+            Locator.CurrentMutable.RegisterConstant<IDataAccess<IQuote>>(new QuoteDataAccess(configuration,client));
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
