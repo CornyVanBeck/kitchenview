@@ -33,5 +33,10 @@ namespace kitchenview.Models
         {
             get; set;
         }
+
+        public string ColorCode
+        {
+            get; set;
+        }
     }
 }

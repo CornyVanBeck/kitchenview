@@ -51,7 +51,7 @@
         </Setter>
     </Style>
 
-    <Style Selector="Border.CalendarDay Border">
+    <Style Selector="Border.CalendarDay">
         <Setter Property="BorderBrush" Value="#EFEFEF"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
@@ -73,10 +73,13 @@
     </Style>
 
     <Style Selector="Border.Appointment">
-        <Setter Property="BorderBrush" Value="#16537e"/>
-        <Setter Property="Background" Value="#006dff"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="BorderBrush" Value="#16537e" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Width" Value="136" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
     </Style>
 
     <Style Selector="Border.Appointment TextBlock">

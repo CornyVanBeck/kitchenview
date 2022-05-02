@@ -22,19 +22,19 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
           <DataTemplate>
-              <Border Width="140" Height="140" Classes="CalendarDay">
-                <StackPanel>
-                  <TextBlock Text="{Binding DayOfMonth}" IsEnabled="{Binding IsEnabled}" />
-                  <ListBox Items="{Binding Appointments}">
+              <Border Classes="CalendarDay">
+                <DockPanel  Width="140" Height="140">
+                  <TextBlock Text="{Binding DayOfMonth}" IsEnabled="{Binding IsEnabled}" DockPanel.Dock="Top"/>
+                  <ListBox Items="{Binding Appointments, Mode=OneWay}" DockPanel.Dock="Top">
                       <ListBox.ItemTemplate>
                           <DataTemplate>
-                            <Border Classes="Appointment" Width="136">
+                            <Border Classes="Appointment" Background="{Binding ColorCode}">
                               <TextBlock Text="{Binding Title}"/>
                             </Border>
                           </DataTemplate>
                       </ListBox.ItemTemplate>
                   </ListBox>
-                </StackPanel>
+                </DockPanel>
               </Border>
           </DataTemplate>
         </ItemsControl.ItemTemplate>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace kitchenview.Models
 {
@@ -32,7 +33,7 @@ namespace kitchenview.Models
             get; set;
         }
 
-        public IEnumerable<Appointment>? Appointments
+        public ObservableCollection<Appointment>? Appointments
         {
             get; set;
         }

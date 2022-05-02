@@ -33,10 +33,23 @@ namespace kitchenview.DataAccess
         public Task<IEnumerable<Appointment>> GetData()
         {
             _tokenSource.Cancel();
+            var returnValue = new List<Appointment>();
             try
             {
-                var calendar = Calendar.Load(CallIcsData().Result);
-                return ConvertEventsToAppointments(calendar.Events);
+                var appointments = configuration?.GetSection("Controls:Calendars:ICS:Appointments").Get<IEnumerable<AppointmentConfiguration>>();
+                if (appointments is null)
+                {
+                    this.Log().Error("Invalid appointment configuration. Cannot load Appointments!");
+                    return Task.FromCanceled<IEnumerable<Appointment>>(_tokenSource.Token);
+                }
+
+                foreach (AppointmentConfiguration config in appointments)
+                {
+                    var calendar = Calendar.Load(CallIcsData(config.Url).Result);
+                    returnValue.AddRange(ConvertEventsToAppointments(calendar.Events, config.ColorCode)?.Result);
+                }
+
+                return Task.FromResult<IEnumerable<Appointment>>(returnValue);
             }
             catch (Exception exp)
             {
@@ -45,14 +58,13 @@ namespace kitchenview.DataAccess
             }
         }
 
-        internal Task<string> CallIcsData()
+        internal Task<string> CallIcsData(string url)
         {
             _tokenSource.Cancel();
 
-            var appointments = configuration?.GetSection("Controls:Calendars:ICS:Appointments").Get<IEnumerable<string>>();
-            string url = appointments?.ElementAt(0) ?? "";
             if (string.IsNullOrEmpty(url))
             {
+                this.Log().Error("Passed url={url} was empty", url);
                 return Task.FromCanceled<string>(_tokenSource.Token);
             }
 
@@ -77,7 +89,7 @@ namespace kitchenview.DataAccess
             }
         }
 
-        internal Task<IEnumerable<Appointment>> ConvertEventsToAppointments(IUniqueComponentList<CalendarEvent> events)
+        internal Task<IEnumerable<Appointment>> ConvertEventsToAppointments(IUniqueComponentList<CalendarEvent> events, string colorCode)
         {
             var returnValue = new List<Appointment>();
             try
@@ -97,7 +109,8 @@ namespace kitchenview.DataAccess
                             {
                                 Longitude = @event.GeographicLocation?.Longitude ?? 0.0d,
                                 Latitude = @event.GeographicLocation?.Latitude ?? 0.0d
-                            }
+                            },
+                            ColorCode = colorCode
                         });
                     }
                 }

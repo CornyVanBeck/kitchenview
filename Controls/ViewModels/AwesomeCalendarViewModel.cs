@@ -14,6 +14,12 @@ using Splat;
 using Microsoft.Extensions.Configuration;
 using System.Timers;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
+using ReactiveUI;
+using kitchenview.Helper.Comparer;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using kitchenview.Helper.Extensions;
 
 namespace kitchenview.Controls.ViewModels
 {
@@ -32,9 +38,9 @@ namespace kitchenview.Controls.ViewModels
             get;
         }
 
-        public ObservableCollection<Appointment>? Appointments
+        public ObservableCollection<Appointment> Appointments
         {
-            get; set;
+            get;
         }
 
         public string? CurrentMonth
@@ -46,6 +52,7 @@ namespace kitchenview.Controls.ViewModels
         {
             this.configuration = configuration;
             this.icsData = dataAccess;
+            Appointments = new ObservableCollection<Appointment>();
             LoadAppointments();
 
             appointmentInterval = new Timer();
@@ -207,16 +214,15 @@ namespace kitchenview.Controls.ViewModels
             return returnValue;
         }
 
-        internal IEnumerable<Appointment> GetCorrespondingAppointments(int month, int day)
+        internal ObservableCollection<Appointment> GetCorrespondingAppointments(int month, int day)
         {
-            var returnValue = new List<Appointment>();
+            var returnValue = new ObservableCollection<Appointment>();
 
             try
             {
-                returnValue = Appointments?.Where(appointment => appointment.DateFrom?.Month == month && 
-                                                    appointment.DateFrom?.Day == day &&
-                                                    appointment.DateFrom?.Year == DateTime.Today.Year)
-                                                    .ToList();
+                returnValue = new ObservableCollection<Appointment>(Appointments?.Where(appointment => appointment.DateFrom?.Month == month &&
+                                                                    appointment.DateFrom?.Day == day &&
+                                                                    appointment.DateFrom?.Year == DateTime.Today.Year)!);
             }
             catch (Exception exp)
             {
@@ -228,13 +234,100 @@ namespace kitchenview.Controls.ViewModels
 
         internal void OnUpdateAppointments(object? sender, EventArgs? args)
         {
+            Debug.WriteLine("Updating appointments");
             LoadAppointments();
         }
 
         internal void LoadAppointments()
         {
             var parsedAppointments = icsData?.GetData().Result ?? new List<Appointment>();
-            Appointments = new ObservableCollection<Appointment>(parsedAppointments!);
+            var newData = new ObservableCollection<Appointment>(parsedAppointments!);
+            var filteredAppointments = newData.Where(entry => entry.DateFrom?.Month == DateTime.Today.Month);
+            if (Weeks is null)
+            {
+                foreach (Appointment item in filteredAppointments)
+                {
+                    Appointments.Add(item);
+                }
+                return;
+            }
+
+
+            ObservableCollection<Appointment> difference;
+            Console.WriteLine($"Appointments: {Appointments.Count} <> Filtered Appointments: {filteredAppointments.Count()}");
+            if (filteredAppointments.Count() > Appointments.Count)
+            {
+                difference = new ObservableCollection<Appointment>(filteredAppointments.Except(Appointments, new AppointmentComparer()));
+                Console.WriteLine("Adding new ones");
+                AddNewAppointments(difference);
+            }
+            else
+            {
+                difference = new ObservableCollection<Appointment>(Appointments.Except(filteredAppointments, new AppointmentComparer()));
+                Console.WriteLine("Removing old ones");
+                RemoveOldAppointments(difference);
+            }
+        }
+
+        internal void AddNewAppointments(ObservableCollection<Appointment> difference)
+        {
+            foreach (Week week in Weeks)
+            {
+                foreach (Day day in week.Days!)
+                {
+                    foreach (Appointment item in difference)
+                    {
+                        if (day?.DayOfMonth == item.DateFrom?.Day)
+                        {
+                            if (day!.Appointments is null)
+                            {
+                                day.Appointments = new ObservableCollection<Appointment>();
+                            }
+
+                            if (day!.Appointments!.Contains(item, new AppointmentComparer()))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                day!.Appointments!.Add(item!);
+                                Appointments.Add(item!);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        internal void RemoveOldAppointments(ObservableCollection<Appointment> difference)
+        {
+            foreach (Week week in Weeks)
+            {
+                foreach (Day day in week.Days!)
+                {
+                    foreach (Appointment item in difference)
+                    {
+                        if (day?.DayOfMonth == item.DateFrom?.Day)
+                        {
+                            if (day!.Appointments is null)
+                            {
+                                break;
+                            }
+
+                            int indexOf = day!.Appointments!.ItemAt<Appointment>(item, new AppointmentComparer());
+                            if (indexOf >= 0)
+                            {
+                                day!.Appointments!.RemoveAt(indexOf);
+                                Appointments.RemoveAt(indexOf);
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
