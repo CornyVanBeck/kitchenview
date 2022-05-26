@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Ical.Net;
@@ -46,7 +45,7 @@ namespace kitchenview.DataAccess
                 foreach (AppointmentConfiguration config in appointments)
                 {
                     var calendar = Calendar.Load(CallIcsData(config.Url).Result);
-                    returnValue.AddRange(ConvertEventsToAppointments(calendar.Events, config.ColorCode)?.Result);
+                    returnValue.AddRange(ConvertEventsToAppointments(calendar.Events, config.ColorCode)?.Result ?? new List<Appointment>(9));
                 }
 
                 return Task.FromResult<IEnumerable<Appointment>>(returnValue);

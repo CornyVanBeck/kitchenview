@@ -156,7 +156,9 @@ namespace kitchenview.Controls.ViewModels
             month = month == 0 ? 12 : month;
             var returnValue = new List<Day>();
             int daysOfPreviousMonth = DateTime.DaysInMonth(DateTime.Today.Year, month);
-            int countOfPreviousDays = Convert.ToInt32(day.DayOfWeek) - 1;
+            int numericDayOfWeek = Convert.ToInt32(day.DayOfWeek);
+            numericDayOfWeek = numericDayOfWeek == 0 ? 7 : numericDayOfWeek;
+            int countOfPreviousDays = numericDayOfWeek - 1;
             int start = daysOfPreviousMonth - countOfPreviousDays + 1;
             for (int i = start; i <= daysOfPreviousMonth; i++)
             {
