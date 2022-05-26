@@ -19,6 +19,8 @@ namespace kitchenview.ViewModels
 
         public QuoteViewModel Quote { get; }
 
+        public AwesomeGalleryViewModel AwesomeGallery { get; }
+
         public MainWindowViewModel(IConfiguration configuration)
         {
             this.configuration = configuration;
@@ -26,6 +28,7 @@ namespace kitchenview.ViewModels
             var quoteService = Locator.Current.GetService<IDataAccess<IQuote>>();
             AwesomeCalendar = new AwesomeCalendarViewModel(configuration, calendarService!);
             Quote = new QuoteViewModel(configuration, quoteService!);
+            AwesomeGallery = new AwesomeGalleryViewModel();
         }
     }
 }

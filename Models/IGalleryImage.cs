@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace kitchenview.Models
 {
@@ -28,5 +30,7 @@ namespace kitchenview.Models
         {
             get; set;
         }
+
+        public Task<Stream> LoadImageBitmapAsync(string url);
     }
 }
