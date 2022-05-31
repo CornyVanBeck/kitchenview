@@ -2,12 +2,19 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using kitchenview.Models;
 using kitchenview.ViewModels;
+using ReactiveUI;
 
 namespace kitchenview.Controls.ViewModels
 {
     public class AwesomeGalleryViewModel : ViewModelBase
     {
-        public ObservableCollection<AwesomeGalleryTileViewModel> Tiles { get; } = new();
+        private ObservableCollection<AwesomeGalleryTileViewModel> _tiles;
+
+        public ObservableCollection<AwesomeGalleryTileViewModel> Tiles
+        {
+            get => _tiles;
+            set => this.RaiseAndSetIfChanged(ref _tiles, value);
+        }
 
         public ObservableCollection<IGalleryImage> GallerySource { get; set; }
 
@@ -29,15 +36,16 @@ namespace kitchenview.Controls.ViewModels
                 },
             };
 
+            _tiles = new ObservableCollection<AwesomeGalleryTileViewModel>();
             foreach (IGalleryImage image in GallerySource)
             {
                 if (image is PhotoprismImage photo)
                 {
-                    Tiles.Add(new AwesomeGalleryTileViewModel(photo));
+                    _tiles.Add(new AwesomeGalleryTileViewModel(photo));
                 }
             }
 
-            foreach(AwesomeGalleryTileViewModel tile in Tiles)
+            foreach (AwesomeGalleryTileViewModel tile in _tiles)
             {
                 tile.LoadImage();
             }

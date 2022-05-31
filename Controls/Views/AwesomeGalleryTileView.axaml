@@ -4,11 +4,5 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="kitchenview.Controls.Views.AwesomeGalleryTileView">  
-    <StackPanel Spacing="5" Width="200">
-        <Border CornerRadius="10" ClipToBounds="True">
-            <Panel Background="#7FFF22DD">
-                <Image Width="200" Stretch="Uniform" Source="{Binding LoadedImage}" />
-            </Panel>
-        </Border>
-    </StackPanel>
+    <Image Stretch="Uniform" Source="{Binding LoadedImage}" />
 </UserControl>

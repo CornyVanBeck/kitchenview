@@ -4,17 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="kitchenview.Controls.Views.AwesomeGalleryView"
-             xmlns:tile="using:kitchenview.Controls.Views">          
-  <Carousel>
+             xmlns:tile="using:kitchenview.Controls.Views"
+             xmlns:aa="using:kitchenview.Helper.Transitions">          
+  <Carousel Name="carousel" Items="{Binding Tiles}">
     <Carousel.PageTransition>
-      <PageSlide Duration="0:00:00.500" Orientation="Horizontal" />
+      <aa:ContinousTransition Duration="0:00:00.500" Orientation="Horizontal" />
     </Carousel.PageTransition>
-    <ItemsControl Items="{Binding Tiles}">
-      <ItemsControl.ItemTemplate>
-          <DataTemplate>
-            <tile:AwesomeGalleryTileView/>
-          </DataTemplate>
-      </ItemsControl.ItemTemplate>
-    </ItemsControl>
+    <Carousel.ItemTemplate>
+        <DataTemplate>
+          <tile:AwesomeGalleryTileView/>
+        </DataTemplate>
+    </Carousel.ItemTemplate>
   </Carousel>
 </UserControl>
