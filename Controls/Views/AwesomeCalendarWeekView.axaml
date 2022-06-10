@@ -3,8 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" 
-             x:Class="kitchenview.Controls.Views.AwesomeCalendarWeekView">
-  <StackPanel Orientation="Horizontal">    
+             x:Class="kitchenview.Controls.Views.AwesomeCalendarWeekView"
+             xmlns:converter="using:kitchenview.Helper.Converter">
+
+  <UserControl.Resources>
+    <converter:AwesomeGradientConverter x:Key="gradientConverter"/>
+    <converter:AwesomeTimeConverter x:Key="timeConverter"/>
+  </UserControl.Resources>
+
+  <StackPanel Orientation="Horizontal">   
       <Panel Classes="CalendarWeekIndicator">
         <Border IsEnabled="{Binding IsCurrent}"/>
         <TextBlock Text="{Binding CalendarWeek}" IsEnabled="{Binding IsCurrent}">
@@ -28,8 +35,13 @@
                   <ListBox Items="{Binding Appointments, Mode=OneWay}" DockPanel.Dock="Top">
                       <ListBox.ItemTemplate>
                           <DataTemplate>
-                            <Border Classes="Appointment" Background="{Binding ColorCode}">
-                              <TextBlock Text="{Binding Title}"/>
+                            <Border Classes="Appointment" Background="{Binding ColorCode, Converter={StaticResource gradientConverter}}">
+                              <StackPanel Orientation="Horizontal">
+                                <Border>
+                                  <TextBlock Text="{Binding TimeFrom, Converter={StaticResource timeConverter}}" Classes="AppointmentTime"/>
+                                </Border>
+                                <TextBlock Text="{Binding Title}" Classes="AppointmentTitle" IsEnabled="{Binding IsLongTitle}"/>
+                              </StackPanel>
                             </Border>
                           </DataTemplate>
                       </ListBox.ItemTemplate>

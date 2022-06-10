@@ -1,4 +1,0 @@
-2022-04-26 20:09:00.370 +02:00 [ERR] Configuration authorization token=null is invalid
-2022-04-26 20:12:37.653 +02:00 [ERR] Configuration authorization token=null is invalid
-2022-04-26 20:13:54.261 +02:00 [ERR] Configuration authorization token=null is invalid
-2022-04-26 20:18:43.979 +02:00 [ERR] Configuration authorization token=null is invalid

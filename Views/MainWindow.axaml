@@ -31,7 +31,7 @@
         <UserControl Content="{Binding AwesomeCalendar}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
         <UserControl Content="{Binding Quote}" Grid.Row="0" Grid.Column="1" />
         
-        <TextBlock Grid.Row="1" Grid.Column="1">Alexa List</TextBlock>
-        <UserControl Content="{Binding AwesomeGallery}" Grid.Row="2" Grid.Column="1" />
+        <!-- <TextBlock Grid.Row="1" Grid.Column="1">Alexa List</TextBlock> -->
+        <UserControl Content="{Binding AwesomeGallery}" Grid.Row="1" Grid.Column="1" />
     </Grid>
 </Window>

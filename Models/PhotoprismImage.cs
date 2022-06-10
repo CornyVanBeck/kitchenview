@@ -2,15 +2,17 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using RestSharp;
+using RestSharp.Authenticators;
 
 namespace kitchenview.Models
 {
     public class PhotoprismImage : IGalleryImage
     {
-        private static HttpClient client = new();
+        private RestClient client;
 
         private string CachePath => "./Cache/{Artist} - {Title}";
-        
+
         public string Name
         {
             get; set;
@@ -36,6 +38,10 @@ namespace kitchenview.Models
             get; set;
         }
 
+        public PhotoprismImage(RestClient client)
+        {
+            this.client = client;
+        }
 
         public async Task<Stream> LoadImageBitmapAsync(string url)
         {
@@ -45,9 +51,10 @@ namespace kitchenview.Models
             }
             else
             {
-                var data = await client.GetByteArrayAsync(url);
+                var request = new RestRequest(url);
+                var data = await client?.GetAsync(request);
 
-                return new MemoryStream(data);
+                return new MemoryStream(data.RawBytes);
             }
         }
 

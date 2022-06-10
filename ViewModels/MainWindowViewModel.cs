@@ -26,9 +26,10 @@ namespace kitchenview.ViewModels
             this.configuration = configuration;
             var calendarService = Locator.Current.GetService<IDataAccess<Appointment>>();
             var quoteService = Locator.Current.GetService<IDataAccess<IQuote>>();
+            var galleryService = Locator.Current.GetService<IDataAccess<PhotoprismImage>>();
             AwesomeCalendar = new AwesomeCalendarViewModel(configuration, calendarService!);
             Quote = new QuoteViewModel(configuration, quoteService!);
-            AwesomeGallery = new AwesomeGalleryViewModel();
+            AwesomeGallery = new AwesomeGalleryViewModel(configuration, galleryService!);
         }
     }
 }

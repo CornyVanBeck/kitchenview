@@ -6,7 +6,7 @@
              x:Class="kitchenview.Controls.Views.AwesomeGalleryView"
              xmlns:tile="using:kitchenview.Controls.Views"
              xmlns:aa="using:kitchenview.Helper.Transitions">          
-  <Carousel Name="carousel" Items="{Binding Tiles}">
+  <Carousel Name="carousel" Items="{Binding Tiles}" Height="400">
     <Carousel.PageTransition>
       <aa:ContinousTransition Duration="0:00:00.500" Orientation="Horizontal" />
     </Carousel.PageTransition>

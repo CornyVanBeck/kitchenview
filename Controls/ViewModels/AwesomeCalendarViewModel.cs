@@ -33,6 +33,11 @@ namespace kitchenview.Controls.ViewModels
 
         private ICollection<Month> Year;
 
+        public ObservableCollection<Day> WeekDays
+        {
+            get;
+        }
+
         public ObservableCollection<Week> Weeks
         {
             get;
@@ -52,7 +57,9 @@ namespace kitchenview.Controls.ViewModels
         {
             this.configuration = configuration;
             this.icsData = dataAccess;
+
             Appointments = new ObservableCollection<Appointment>();
+
             LoadAppointments();
 
             appointmentInterval = new Timer();
@@ -249,24 +256,42 @@ namespace kitchenview.Controls.ViewModels
             {
                 foreach (Appointment item in filteredAppointments)
                 {
-                    Appointments.Add(item);
+                    var foundItem = Appointments.FirstOrDefault(entry => entry.Title == item.Title &&
+                                                                        entry.DateFrom == item.DateFrom &&
+                                                                        entry.DateTo == item.DateTo &&
+                                                                        entry.TimeFrom == item.TimeFrom &&
+                                                                        entry.TimeTo == item.TimeTo);
+                    if (foundItem is not null)
+                    {
+                        foundItem.ColorCode += $";{item.ColorCode}";
+                    }
+                    else
+                    {
+                        Appointments.Add(item);
+                    }
                 }
                 return;
             }
 
 
             ObservableCollection<Appointment> difference;
+#if DEBUG
             Console.WriteLine($"Appointments: {Appointments.Count} <> Filtered Appointments: {filteredAppointments.Count()}");
+#endif
             if (filteredAppointments.Count() > Appointments.Count)
             {
                 difference = new ObservableCollection<Appointment>(filteredAppointments.Except(Appointments, new AppointmentComparer()));
+#if DEBUG
                 Console.WriteLine("Adding new ones");
+#endif
                 AddNewAppointments(difference);
             }
             else
             {
                 difference = new ObservableCollection<Appointment>(Appointments.Except(filteredAppointments, new AppointmentComparer()));
+#if DEBUG
                 Console.WriteLine("Removing old ones");
+#endif
                 RemoveOldAppointments(difference);
             }
         }

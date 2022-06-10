@@ -38,5 +38,12 @@ namespace kitchenview.Models
         {
             get; set;
         }
+
+        public bool IsLongTitle
+        {
+            get; set;
+        }
+
+
     }
 }

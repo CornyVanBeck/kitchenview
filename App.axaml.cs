@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Threading;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -21,10 +23,8 @@ namespace kitchenview
 
         public App()
         {
-            var builder = new ConfigurationBuilder()
-                            .SetBasePath(System.IO.Directory.GetCurrentDirectory())
-                            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            configuration = builder.Build();
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("de-DE");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE");
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
@@ -32,6 +32,11 @@ namespace kitchenview
                                 rollingInterval: RollingInterval.Day,
                                 outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
                 .CreateLogger();
+
+            var builder = new ConfigurationBuilder()
+                            .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            configuration = builder.Build();
         }
 
         public override void Initialize()
@@ -44,6 +49,7 @@ namespace kitchenview
             Locator.CurrentMutable.UseSerilogFullLogger();
             Locator.CurrentMutable.RegisterConstant<IDataAccess<Appointment>>(new IcsCalendarDataAccess(configuration, client));
             Locator.CurrentMutable.RegisterConstant<IDataAccess<IQuote>>(new QuoteDataAccess(configuration, client));
+            Locator.CurrentMutable.RegisterConstant<IDataAccess<PhotoprismImage>>(new PhotoprismGalleryDataAccess(configuration, client));
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {

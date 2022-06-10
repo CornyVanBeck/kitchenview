@@ -103,14 +103,15 @@ namespace kitchenview.DataAccess
                             Title = @event.Summary,
                             DateFrom = @event.Start?.Value,
                             DateTo = @event.End?.Value,
-                            TimeFrom = @event.Start?.Value.TimeOfDay,
-                            TimeTo = @event.End?.Value.TimeOfDay,
+                            TimeFrom = @event.Start?.Value.ToLocalTime().TimeOfDay,
+                            TimeTo = @event.End?.Value.ToLocalTime().TimeOfDay,
                             Location = new Location()
                             {
                                 Longitude = @event.GeographicLocation?.Longitude ?? 0.0d,
                                 Latitude = @event.GeographicLocation?.Latitude ?? 0.0d
                             },
-                            ColorCode = colorCode
+                            ColorCode = colorCode,
+                            IsLongTitle = @event.Summary?.Length > 20
                         });
                     }
                 }

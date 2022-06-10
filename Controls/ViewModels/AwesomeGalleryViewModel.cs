@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using kitchenview.DataAccess;
 using kitchenview.Models;
 using kitchenview.ViewModels;
+using Microsoft.Extensions.Configuration;
 using ReactiveUI;
 
 namespace kitchenview.Controls.ViewModels
@@ -18,9 +20,9 @@ namespace kitchenview.Controls.ViewModels
 
         public ObservableCollection<IGalleryImage> GallerySource { get; set; }
 
-        public AwesomeGalleryViewModel()
+        public AwesomeGalleryViewModel(IConfiguration configuration, IDataAccess<PhotoprismImage> dataAccess)
         {
-            GallerySource = new ObservableCollection<IGalleryImage>()
+            /*GallerySource = new ObservableCollection<IGalleryImage>()
             {
                 new PhotoprismImage()
                 {
@@ -34,10 +36,12 @@ namespace kitchenview.Controls.ViewModels
                 {
                     Url = "https://www.pixelstalk.net/wp-content/uploads/2016/10/Free-pine-forest-wallpaper-620x388.jpg"
                 },
-            };
+            };*/
 
             _tiles = new ObservableCollection<AwesomeGalleryTileViewModel>();
-            foreach (IGalleryImage image in GallerySource)
+            var response = dataAccess.GetData();
+            response?.Wait();
+            foreach (IGalleryImage image in response?.Result)
             {
                 if (image is PhotoprismImage photo)
                 {

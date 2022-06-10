@@ -32,7 +32,7 @@ namespace kitchenview.Controls.ViewModels
 
         public async Task LoadImage()
         {
-            await using (var imageStream = await image.LoadImageBitmapAsync(image?.Url))
+            await using (var imageStream = await image?.LoadImageBitmapAsync(image?.Url))
             {
                 LoadedImage = await Task.Run(() => Bitmap.DecodeToWidth(imageStream, 400));
             }
