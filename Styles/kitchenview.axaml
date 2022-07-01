@@ -60,6 +60,17 @@
         </Setter>
     </Style>
 
+    <Style Selector="Border.CalendarDay[IsEnabled=true]">
+        <Setter Property="Background">
+            <LinearGradientBrush StartPoint="100%,0%" EndPoint="100%,100%">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Offset="0" Color="#EFEFEF" />
+                  <GradientStop Offset="1" Color="#FFF" />
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+        </Setter>
+    </Style>
+
     <Style Selector="Border.CalendarDay">
         <Setter Property="BorderBrush" Value="#EFEFEF"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -156,7 +167,7 @@
     <Style Selector="TextBlock.Quote">
         <Setter Property="FontFamily" Value="Ubuntu Thin"/>
         <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="Padding" Value="10 10 50 10"/>
         <Setter Property="Foreground" Value="#333"/>
@@ -173,5 +184,49 @@
 
     <Style Selector="Border.Blurred">
         <Setter Property="BoxShadow" Value="inset 0 0 100 50 #99000000" />
+    </Style>
+
+    <Style Selector="Border.ShoppingList">
+        <Setter Property="BoxShadow" Value="5 5 10 2 #222"/>
+        <Setter Property="BorderBrush">
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Offset="0" Color="#00d2ff" />
+                  <GradientStop Offset="1" Color="#c300ff" />
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+        </Setter>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Margin" Value="10 10 10 10"/>
+        <Setter Property="Background">
+            <LinearGradientBrush StartPoint="100%,0%" EndPoint="100%,100%">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Offset="0" Color="#FFF" />
+                  <GradientStop Offset="1" Color="#EFEFEF" />
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+        </Setter>
+    </Style>
+
+    <Style Selector="Border.ShoppingList TextBlock">
+        <Setter Property="FontFamily" Value="Ubuntu Thin"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#333"/>
+        <Setter Property="Padding" Value="7 2 2 2"/>
+    </Style>
+
+    <Style Selector="Border.Weather">
+        <Setter Property="ZIndex" Value="10"/>
+        <Setter Property="Height" Value="75"/>
+        <Setter Property="Background" Value="#333"/>
+        <Setter Property="OpacityMask">
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Offset="0" Color="Transparent" />
+                  <GradientStop Offset="1" Color="Black" />
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+        </Setter>
     </Style>
 </Styles>

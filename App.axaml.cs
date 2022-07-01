@@ -50,6 +50,7 @@ namespace kitchenview
             Locator.CurrentMutable.RegisterConstant<IDataAccess<Appointment>>(new IcsCalendarDataAccess(configuration, client));
             Locator.CurrentMutable.RegisterConstant<IDataAccess<IQuote>>(new QuoteDataAccess(configuration, client));
             Locator.CurrentMutable.RegisterConstant<IDataAccess<PhotoprismImage>>(new PhotoprismGalleryDataAccess(configuration, client));
+            Locator.CurrentMutable.RegisterConstant<IDataAccess<TodoistShoppingListEntry>>(new TodoistDataAccess(configuration));
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {

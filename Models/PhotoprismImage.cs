@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Text.Json;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -11,11 +12,21 @@ namespace kitchenview.Models
     {
         private RestClient client;
 
-        private string CachePath => "./Cache/{Artist} - {Title}";
+        private string CachePath;
+
+        private string _name;
 
         public string Name
         {
-            get; set;
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                CachePath = $"./Cache/{value}.jpeg";
+            }
         }
 
         public string FileType
@@ -45,35 +56,36 @@ namespace kitchenview.Models
 
         public async Task<Stream> LoadImageBitmapAsync(string url)
         {
-            if (File.Exists(CachePath + ".jpeg"))
+            if (File.Exists(CachePath))
             {
-                return File.OpenRead(CachePath + ".jpeg");
+                return File.OpenRead(CachePath);
             }
             else
             {
                 var request = new RestRequest(url);
                 var data = await client?.GetAsync(request);
 
-                return new MemoryStream(data.RawBytes);
+                SaveAsync(data!.RawBytes);
+                return new MemoryStream(data!.RawBytes);
             }
         }
 
-        /* internal async Task SaveAsync()
+        internal async Task SaveAsync(byte[] data)
         {
             if (!Directory.Exists("./Cache"))
             {
                 Directory.CreateDirectory("./Cache");
             }
 
-            using (var fileStreamToSave = File.OpenWrite(CachePath))
+            using (var fs = File.OpenWrite(CachePath))
             {
-                await SaveToStreamAsync(fileStreamToSave);
+                await fs.WriteAsync(data, 0, data.Length);
             }
         }
 
-        internal static async Task SaveToStreamAsync(Stream stream)
+        internal static async Task SaveToStreamAsync(PhotoprismImage data, Stream stream)
         {
-            await JsonConvert.SerializeObject(stream);
-        } */
+            await JsonSerializer.SerializeAsync(stream, data).ConfigureAwait(false);
+        }
     }
 }

@@ -91,7 +91,7 @@ namespace kitchenview.DataAccess
                 {
                     returnValue.Add(new PhotoprismImage(client)
                     {
-                        Name = element["Title"]?.ToString() ?? "",
+                        Name = element["FileUID"]?.ToString() ?? "",
                         Url = $"{configuration["Controls:Gallery:Photoprism:BaseUrl"]}" +
                                 $"{configuration["Controls:Gallery:Photoprism:ImageBasePath"]}/" +
                                 $"{(element["FileName"]?.ToString() ?? "")}",

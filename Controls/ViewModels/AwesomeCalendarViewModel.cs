@@ -135,7 +135,7 @@ namespace kitchenview.Controls.ViewModels
             int daysOfMonth = DateTime.DaysInMonth(DateTime.Today.Year, month);
             var day = new DateTime(DateTime.Today.Year, month, daysOfMonth);
             int counter = 1;
-            for (int i = Convert.ToInt32(day.DayOfWeek); i <= 6; i++)
+            for (int i = Convert.ToInt32(day.DayOfWeek); i < 6; i++)
             {
                 var dayOfWeek = new DateTime(DateTime.Today.Year, month, counter).DayOfWeek;
                 int dayOfWeekNumber = Convert.ToInt32(dayOfWeek) - 1;
