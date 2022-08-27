@@ -1,25 +1,18 @@
+using kitchenview.DataAccess;
+using kitchenview.Helper.Comparer;
+using kitchenview.Helper.Extensions;
+using kitchenview.Models;
+using kitchenview.ViewModels;
+using Microsoft.Extensions.Configuration;
+using ReactiveUI;
+using Splat;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using kitchenview.Models;
-using kitchenview.ViewModels;
-using System.Globalization;
-using kitchenview.Controls.Views;
-using kitchenview.DataAccess;
-using Splat;
-using Microsoft.Extensions.Configuration;
-using System.Timers;
-using Newtonsoft.Json.Linq;
 using System.Diagnostics;
-using ReactiveUI;
-using kitchenview.Helper.Comparer;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using kitchenview.Helper.Extensions;
+using System.Globalization;
+using System.Linq;
+using System.Timers;
 
 namespace kitchenview.Controls.ViewModels
 {
