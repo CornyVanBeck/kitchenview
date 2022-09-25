@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kitchenview", "kitchenview.csproj", "{43CDB74A-8ED2-4633-B02B-1A72DAC93160}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kitchenview", "src/KitchenViewUi/kitchenview.csproj", "{43CDB74A-8ED2-4633-B02B-1A72DAC93160}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
