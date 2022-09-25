@@ -30,7 +30,7 @@ namespace kitchenview.Controls.Views
             _carousel.AutoScrollToSelectedItem = false;
 
             var timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Interval = TimeSpan.FromMinutes(1);
             timer.Tick += (sender, e) =>
             {
                 if (_carousel.SelectedIndex == (_carousel.ItemCount - 1))

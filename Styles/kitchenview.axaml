@@ -90,6 +90,20 @@
 		<Setter Property="HorizontalAlignment" Value="Right"/>
 	</Style>
 
+	<Style Selector="Border.CalendarDay[IsEnabled=true] TextBlock">
+		<Setter Property="Padding" Value="5"/>
+		<Setter Property="HorizontalAlignment" Value="Right"/>
+		<Setter Property="FontWeight" Value="Bold" />
+		<Setter Property="Foreground">
+			<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+				<LinearGradientBrush.GradientStops>
+					<GradientStop Offset="0" Color="#00d2ff" />
+					<GradientStop Offset="1" Color="#c300ff" />
+				</LinearGradientBrush.GradientStops>
+			</LinearGradientBrush>
+		</Setter>
+	</Style>
+
 	<Style Selector="Border.CalendarDay TextBlock[IsEnabled=false]">
 		<Setter Property="Padding" Value="5"/>
 		<Setter Property="Foreground" Value="#999"/>

@@ -124,11 +124,11 @@ namespace kitchenview.Controls.ViewModels
         internal IEnumerable<Day> AddSucceedingDays(int month)
         {
             var returnValue = new List<Day>();
-            month = month > 12 ? 1 : 12;
+            month = month > 12 ? 1 : month;
             int daysOfMonth = DateTime.DaysInMonth(DateTime.Today.Year, month);
             var day = new DateTime(DateTime.Today.Year, month, daysOfMonth);
             int counter = 1;
-            for (int i = Convert.ToInt32(day.DayOfWeek); i < 6; i++)
+            for (int i = Convert.ToInt32(day.DayOfWeek); i < 7; i++)
             {
                 var dayOfWeek = new DateTime(DateTime.Today.Year, month, counter).DayOfWeek;
                 int dayOfWeekNumber = Convert.ToInt32(dayOfWeek) - 1;
@@ -141,7 +141,7 @@ namespace kitchenview.Controls.ViewModels
                     Name = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dayOfWeek),
                     IsCurrent = counter == DateTime.Today.Day,
                     HasBirthday = false,
-                    Appointments = GetCorrespondingAppointments(month, counter),
+                    Appointments = GetCorrespondingAppointments(month + 1, counter),
                     IsEnabled = false
                 });
 

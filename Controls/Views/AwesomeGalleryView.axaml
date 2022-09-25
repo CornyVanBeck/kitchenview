@@ -8,7 +8,7 @@
              xmlns:aa="using:kitchenview.Helper.Transitions">
 	<Carousel Name="carousel" Items="{Binding Tiles}" Height="400">
 		<Carousel.PageTransition>
-			<aa:ContinousTransition Duration="0:00:00.500" Orientation="Horizontal" />
+			<aa:ContinousTransition Duration="00:00:00.500" Orientation="Horizontal" />
 		</Carousel.PageTransition>
 		<Carousel.ItemTemplate>
 			<DataTemplate>
