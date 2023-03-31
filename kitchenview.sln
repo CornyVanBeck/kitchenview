@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kitchenview", "kitchenview.csproj", "{43CDB74A-8ED2-4633-B02B-1A72DAC93160}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ical.Net", "..\..\ical.net-master\ical.net-master\src\Ical.Net\Ical.Net.csproj", "{3E513353-C837-4683-A0B9-0EF7FAA188D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,18 @@ Global
 		{43CDB74A-8ED2-4633-B02B-1A72DAC93160}.Release|Any CPU.Build.0 = Release|Any CPU
 		{43CDB74A-8ED2-4633-B02B-1A72DAC93160}.Release|x64.ActiveCfg = Release|x64
 		{43CDB74A-8ED2-4633-B02B-1A72DAC93160}.Release|x64.Build.0 = Release|x64
+		{3E513353-C837-4683-A0B9-0EF7FAA188D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E513353-C837-4683-A0B9-0EF7FAA188D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E513353-C837-4683-A0B9-0EF7FAA188D4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3E513353-C837-4683-A0B9-0EF7FAA188D4}.Debug|x64.Build.0 = Debug|Any CPU
+		{3E513353-C837-4683-A0B9-0EF7FAA188D4}.Linux|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E513353-C837-4683-A0B9-0EF7FAA188D4}.Linux|Any CPU.Build.0 = Debug|Any CPU
+		{3E513353-C837-4683-A0B9-0EF7FAA188D4}.Linux|x64.ActiveCfg = Debug|Any CPU
+		{3E513353-C837-4683-A0B9-0EF7FAA188D4}.Linux|x64.Build.0 = Debug|Any CPU
+		{3E513353-C837-4683-A0B9-0EF7FAA188D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E513353-C837-4683-A0B9-0EF7FAA188D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E513353-C837-4683-A0B9-0EF7FAA188D4}.Release|x64.ActiveCfg = Release|Any CPU
+		{3E513353-C837-4683-A0B9-0EF7FAA188D4}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,18 +1,16 @@
+using Ical.Net;
+using Ical.Net.CalendarComponents;
+using Ical.Net.Proxies;
+using kitchenview.Models;
+using Microsoft.Extensions.Configuration;
+using Splat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Ical.Net;
-using Ical.Net.CalendarComponents;
-using Ical.Net.DataTypes;
-using Ical.Net.Proxies;
-using kitchenview.Models;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
-using RestSharp;
-using Splat;
 
 namespace kitchenview.DataAccess
 {
@@ -20,11 +18,11 @@ namespace kitchenview.DataAccess
     {
         private readonly IConfiguration configuration;
 
-        private readonly RestClient client;
+        private readonly HttpClient client;
 
         private CancellationTokenSource _tokenSource = new CancellationTokenSource();
 
-        public IcsCalendarDataAccess(IConfiguration configuration, RestClient client)
+        public IcsCalendarDataAccess(IConfiguration configuration, HttpClient client)
         {
             this.configuration = configuration;
             this.client = client;
@@ -70,8 +68,8 @@ namespace kitchenview.DataAccess
 
             try
             {
-                var request = new RestRequest(url!);
-                var response = client.GetAsync(request!);
+                var response = client.GetAsync(url!);
+                response.Wait();
 
                 if (response?.Result.StatusCode != HttpStatusCode.OK)
                 {
@@ -79,7 +77,9 @@ namespace kitchenview.DataAccess
                 }
                 else
                 {
-                    return Task.FromResult<string>(response?.Result.Content ?? "");
+                    var content = response?.Result.Content.ReadAsStringAsync();
+                    content.Wait();
+                    return Task.FromResult<string>(content.Result ?? "");
                 }
             }
             catch (Exception exp)
@@ -96,7 +96,18 @@ namespace kitchenview.DataAccess
             {
                 foreach (CalendarEvent @event in events)
                 {
-                    if (@event.Start?.Value.Year == DateTime.Today.Year)
+                    if (@event.RecurrenceRules.Any())
+                    {
+                        returnValue.Add(new Appointment()
+                        {
+                            Title = @event.Summary,
+                            ColorCode = colorCode,
+                            IsLongTitle = @event.Summary?.Length > 20,
+                            IsRepeatingEventOnly = true,
+                            RepeatingPattern = @event.RecurrenceRules.FirstOrDefault()
+                        });
+                    }
+                    else if (@event.Start?.Value.Year == DateTime.Today.Year)
                     {
                         returnValue.Add(new Appointment()
                         {

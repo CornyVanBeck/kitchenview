@@ -1,5 +1,3 @@
-using System.Globalization;
-using System.Threading;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -12,12 +10,17 @@ using RestSharp;
 using Serilog;
 using Splat;
 using Splat.Serilog;
+using System.Globalization;
+using System.Net.Http;
+using System.Threading;
 
 namespace kitchenview
 {
     public partial class App : Application
     {
-        private readonly RestClient client = new RestClient();
+        private readonly HttpClient client = new HttpClient();
+
+        private readonly RestClient restClient = new RestClient();
 
         private readonly IConfiguration configuration;
 
@@ -48,8 +51,8 @@ namespace kitchenview
         {
             Locator.CurrentMutable.UseSerilogFullLogger();
             Locator.CurrentMutable.RegisterConstant<IDataAccess<Appointment>>(new IcsCalendarDataAccess(configuration, client));
-            Locator.CurrentMutable.RegisterConstant<IDataAccess<IQuote>>(new QuoteDataAccess(configuration, client));
-            Locator.CurrentMutable.RegisterConstant<IDataAccess<PhotoprismImage>>(new PhotoprismGalleryDataAccess(configuration, client));
+            Locator.CurrentMutable.RegisterConstant<IDataAccess<IQuote>>(new QuoteDataAccess(configuration, restClient));
+            Locator.CurrentMutable.RegisterConstant<IDataAccess<PhotoprismImage>>(new PhotoprismGalleryDataAccess(configuration, restClient));
             Locator.CurrentMutable.RegisterConstant<IDataAccess<TodoistShoppingListEntry>>(new TodoistDataAccess(configuration));
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

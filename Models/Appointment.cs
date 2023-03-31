@@ -1,3 +1,4 @@
+using Ical.Net.DataTypes;
 using System;
 
 namespace kitchenview.Models
@@ -44,6 +45,14 @@ namespace kitchenview.Models
             get; set;
         }
 
+        public bool IsRepeatingEventOnly
+        {
+            get; set;
+        }
 
+        public RecurrencePattern? RepeatingPattern
+        {
+            get; set;
+        }
     }
 }

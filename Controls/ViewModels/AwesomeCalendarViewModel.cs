@@ -242,18 +242,19 @@ namespace kitchenview.Controls.ViewModels
 
         internal void LoadAppointments()
         {
+            var comparer = new AppointmentComparer();
             var parsedAppointments = icsData?.GetData().Result ?? new List<Appointment>();
             var newData = new ObservableCollection<Appointment>(parsedAppointments!);
-            var filteredAppointments = newData.Where(entry => entry.DateFrom?.Month == DateTime.Today.Month);
+            var filteredAppointments = newData.Where(entry => entry.DateFrom?.Month == DateTime.Today.Month || entry.IsRepeatingEventOnly);
             if (Weeks is null)
             {
                 foreach (Appointment item in filteredAppointments)
                 {
-                    var foundItem = Appointments.FirstOrDefault(entry => entry.Title == item.Title &&
-                                                                        entry.DateFrom == item.DateFrom &&
-                                                                        entry.DateTo == item.DateTo &&
-                                                                        entry.TimeFrom == item.TimeFrom &&
-                                                                        entry.TimeTo == item.TimeTo);
+                    var foundItem = Appointments.FirstOrDefault(appointment => appointment.Title == item.Title &&
+                                                                        appointment.DateFrom == item.DateFrom &&
+                                                                        appointment.DateTo == item.DateTo &&
+                                                                        appointment.TimeFrom == item.TimeFrom &&
+                                                                        appointment.TimeTo == item.TimeTo);
                     if (foundItem is not null)
                     {
                         foundItem.ColorCode += $";{item.ColorCode}";
@@ -273,7 +274,7 @@ namespace kitchenview.Controls.ViewModels
 #endif
             if (filteredAppointments.Count() > Appointments.Count)
             {
-                difference = new ObservableCollection<Appointment>(filteredAppointments.Except(Appointments, new AppointmentComparer()));
+                difference = new ObservableCollection<Appointment>(filteredAppointments.Except(Appointments, comparer));
 #if DEBUG
                 Console.WriteLine("Adding new ones");
 #endif
@@ -281,7 +282,7 @@ namespace kitchenview.Controls.ViewModels
             }
             else
             {
-                difference = new ObservableCollection<Appointment>(Appointments.Except(filteredAppointments, new AppointmentComparer()));
+                difference = new ObservableCollection<Appointment>(Appointments.Except(filteredAppointments, comparer));
 #if DEBUG
                 Console.WriteLine("Removing old ones");
 #endif
@@ -291,6 +292,7 @@ namespace kitchenview.Controls.ViewModels
 
         internal void AddNewAppointments(ObservableCollection<Appointment> difference)
         {
+            var comparer = new AppointmentComparer();
             foreach (Week week in Weeks)
             {
                 foreach (Day day in week.Days!)
@@ -304,7 +306,7 @@ namespace kitchenview.Controls.ViewModels
                                 day.Appointments = new ObservableCollection<Appointment>();
                             }
 
-                            if (day!.Appointments!.Contains(item, new AppointmentComparer()))
+                            if (day!.Appointments!.Contains(item, comparer))
                             {
                                 break;
                             }
