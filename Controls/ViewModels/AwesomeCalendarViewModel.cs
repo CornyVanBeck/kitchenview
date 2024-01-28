@@ -9,10 +9,18 @@ using Splat;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
+using kitchenview.Models;
+using kitchenview.ViewModels;
+using System.Globalization;
+using kitchenview.DataAccess;
+using Splat;
+using Microsoft.Extensions.Configuration;
 using System.Timers;
+using System.Diagnostics;
+using ReactiveUI;
+using kitchenview.Helper.Comparer;
+using kitchenview.Helper.Extensions;
 
 namespace kitchenview.Controls.ViewModels
 {
@@ -115,7 +123,7 @@ namespace kitchenview.Controls.ViewModels
 
                 if (i == weeks - 1)
                 {
-                    (returnValue.Last().Days as List<Day>)!.AddRange(AddSucceedingDays(month));
+                    //(returnValue.Last().Days as List<Day>)!.AddRange(AddSucceedingDays(month));
                 }
             }
             return returnValue;
@@ -204,7 +212,7 @@ namespace kitchenview.Controls.ViewModels
                     IsCurrent = i == DateTime.Today.Day,
                     HasBirthday = false,
                     Appointments = GetCorrespondingAppointments(month, i),
-                    IsEnabled = true
+                    IsEnabled = i == DateTime.Today.Day
                 });
 
                 if (dayOfWeekNumber == 6)

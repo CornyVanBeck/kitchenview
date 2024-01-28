@@ -5,23 +5,32 @@
              xmlns:local="using:kitchenview.Controls.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="kitchenview.Controls.Views.AwesomeCalendarView">
-	<StackPanel HorizontalAlignment="Center">
-		<TextBlock Text="{Binding CurrentMonth}" FontSize="24"/>
-		<StackPanel Orientation="Horizontal" Margin="25 0 0 0">
-			<TextBlock Text="Montag" Width="140" TextAlignment="Center"/>
-			<TextBlock Text="Dienstag" Width="140" TextAlignment="Center"/>
-			<TextBlock Text="Mittwoch" Width="140" TextAlignment="Center"/>
-			<TextBlock Text="Donnerstag" Width="140" TextAlignment="Center"/>
-			<TextBlock Text="Freitag" Width="140" TextAlignment="Center"/>
-			<TextBlock Text="Samstag" Width="140" TextAlignment="Center"/>
-			<TextBlock Text="Sonntag" Width="140" TextAlignment="Center"/>
-		</StackPanel>
-		<ItemsControl Items="{Binding Weeks}">
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<local:AwesomeCalendarWeekView />
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
-	</StackPanel>
+
+<StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+    <Panel Width="180" Height="500"> 
+      <TextBlock Text="{Binding CurrentMonth}" Classes="CalendarTitle" Height="110" Width="500" Margin="-75 0 0 0">
+        <TextBlock.RenderTransform>
+          <RotateTransform Angle="-90" CenterX="75" CenterY="0"/>
+        </TextBlock.RenderTransform>
+      </TextBlock> 
+    </Panel>
+  <StackPanel HorizontalAlignment="Left">
+      <StackPanel Orientation="Horizontal" Margin="25 0 0 0"> 
+        <TextBlock Text="Montag" Width="140" TextAlignment="Center"/>
+        <TextBlock Text="Dienstag" Width="140" TextAlignment="Center"/>
+        <TextBlock Text="Mittwoch" Width="140" TextAlignment="Center"/>
+        <TextBlock Text="Donnerstag" Width="140" TextAlignment="Center"/>
+        <TextBlock Text="Freitag" Width="140" TextAlignment="Center"/>
+        <TextBlock Text="Samstag" Width="140" TextAlignment="Center"/>
+        <TextBlock Text="Sonntag" Width="140" TextAlignment="Center"/>
+      </StackPanel> 
+      <ItemsControl Items="{Binding Weeks}">             
+          <ItemsControl.ItemTemplate>                      
+            <DataTemplate>
+              <local:AwesomeCalendarWeekView />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+      </ItemsControl>
+  </StackPanel>
+</StackPanel>
 </UserControl>

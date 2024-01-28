@@ -1,22 +1,28 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<Style Selector="Window">
-		<Setter Property="Background" Value="#333"/>
-		<Setter Property="FontFamily" Value="Ubuntu Thin"/>
-		<Setter Property="FontWeight" Value="Light"/>
-	</Style>
+    <Style Selector="Window">
+        <Setter Property="Background" Value="#fff4e6"/>
+        <Setter Property="FontFamily" Value="Ubuntu Thin"/>
+        <Setter Property="FontWeight" Value="Light"/>
+    </Style>
 
-	<Style Selector="Border.ActiveCalendarWeek[IsEnabled=true]">
-		<Setter Property="BorderBrush">
-			<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-				<LinearGradientBrush.GradientStops>
-					<GradientStop Offset="0" Color="#00d2ff" />
-					<GradientStop Offset="1" Color="#c300ff" />
-				</LinearGradientBrush.GradientStops>
-			</LinearGradientBrush>
-		</Setter>
-		<Setter Property="BorderThickness" Value="2"/>
-	</Style>
+    <Style Selector="TextBlock.CalendarTitle">
+        <Setter Property="FontSize" Value="64"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontFamily" Value="{StaticResource MeddonRegularFont}"/>    
+    </Style>
+
+    <Style Selector="Border.ActiveCalendarWeek[IsEnabled=true]">
+        <Setter Property="BorderBrush">
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Offset="0" Color="#ffe77e" />
+                  <GradientStop Offset="1" Color="#cb7e23" />
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+        </Setter>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
 
 	<Style Selector="Panel.CalendarWeekIndicator TextBlock">
 		<Setter Property="Padding" Value="2"/>
@@ -24,11 +30,11 @@
 		<Setter Property="FontWeight" Value="Bold"/>
 	</Style>
 
-	<Style Selector="Panel.CalendarWeekIndicator Border">
-		<Setter Property="Padding" Value="2"/>
-		<Setter Property="Background" Value="#00d2ff"/>
-		<Setter Property="CornerRadius" Value="10 0 0 10"/>
-	</Style>
+    <Style Selector="Panel.CalendarWeekIndicator Border">
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Background" Value="#ffe77e"/>
+        <Setter Property="CornerRadius" Value="10 0 0 10"/>
+    </Style>
 
 	<Style Selector="Panel.CalendarWeekIndicator TextBlock[IsEnabled=false]">
 		<Setter Property="Padding" Value="2"/>
@@ -60,16 +66,16 @@
 		</Setter>
 	</Style>
 
-	<Style Selector="Border.CalendarDay[IsEnabled=true]">
-		<Setter Property="Background">
-			<LinearGradientBrush StartPoint="100%,0%" EndPoint="100%,100%">
-				<LinearGradientBrush.GradientStops>
-					<GradientStop Offset="0" Color="#EFEFEF" />
-					<GradientStop Offset="1" Color="#FFF" />
-				</LinearGradientBrush.GradientStops>
-			</LinearGradientBrush>
-		</Setter>
-	</Style>
+    <Style Selector="Border.CalendarDay[IsEnabled=true]">
+        <Setter Property="Background">
+            <LinearGradientBrush StartPoint="100%,0%" EndPoint="100%,100%">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Offset="0" Color="#fff4e6" />
+                  <GradientStop Offset="1" Color="#FFF" />
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+        </Setter>
+    </Style>
 
 	<Style Selector="Border.CalendarDay">
 		<Setter Property="BorderBrush" Value="#EFEFEF"/>
@@ -84,31 +90,26 @@
 		<Setter Property="Padding" Value="2 1 2 1"/>
 	</Style>
 
-	<Style Selector="Border.CalendarDay TextBlock">
-		<Setter Property="Padding" Value="5"/>
-		<Setter Property="Foreground" Value="#333"/>
-		<Setter Property="HorizontalAlignment" Value="Right"/>
-	</Style>
+    <Style Selector="Border.CalendarDay TextBlock">
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Foreground" Value="#EFEFEF"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
 
-	<Style Selector="Border.CalendarDay[IsEnabled=true] TextBlock">
-		<Setter Property="Padding" Value="5"/>
-		<Setter Property="HorizontalAlignment" Value="Right"/>
-		<Setter Property="FontWeight" Value="Bold" />
-		<Setter Property="Foreground">
-			<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-				<LinearGradientBrush.GradientStops>
-					<GradientStop Offset="0" Color="#00d2ff" />
-					<GradientStop Offset="1" Color="#c300ff" />
-				</LinearGradientBrush.GradientStops>
-			</LinearGradientBrush>
-		</Setter>
-	</Style>
+    <Style Selector="TextBlock.CalendarDayText">
+        <Setter Property="Padding" Value="15 5 5 5"/>
+        <Setter Property="Foreground" Value="#999"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="104"/>
+    </Style>
 
-	<Style Selector="Border.CalendarDay TextBlock[IsEnabled=false]">
-		<Setter Property="Padding" Value="5"/>
-		<Setter Property="Foreground" Value="#999"/>
-		<Setter Property="HorizontalAlignment" Value="Right"/>
-	</Style>
+    <Style Selector="TextBlock.CalendarDayText[IsEnabled=false]">
+        <Setter Property="Foreground" Value="#EFEFEF"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
 
 	<Style Selector="Border.Appointment">
 		<Setter Property="BorderBrush" Value="#16537e" />
@@ -230,17 +231,29 @@
 		<Setter Property="Padding" Value="7 2 2 2"/>
 	</Style>
 
-	<Style Selector="Border.Weather">
-		<Setter Property="ZIndex" Value="10"/>
-		<Setter Property="Height" Value="75"/>
-		<Setter Property="Background" Value="#333"/>
-		<Setter Property="OpacityMask">
-			<LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
-				<LinearGradientBrush.GradientStops>
-					<GradientStop Offset="0" Color="Transparent" />
-					<GradientStop Offset="1" Color="Black" />
-				</LinearGradientBrush.GradientStops>
-			</LinearGradientBrush>
-		</Setter>
-	</Style>
+    <Style Selector="Border.Weather">
+        <Setter Property="ZIndex" Value="10"/>
+        <Setter Property="Height" Value="75"/>
+        <Setter Property="Background" Value="#333"/>
+        <Setter Property="OpacityMask">
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Offset="0" Color="Transparent" />
+                  <GradientStop Offset="1" Color="Black" />
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+        </Setter>
+    </Style>
+
+    <Style Selector="TextBlock.WordClock">
+        <Setter Property="Foreground" Value="#CFCFCF" />
+        <Setter Property="FontSize" Value="56" />
+        <Setter Property="FontFamily" Value="{StaticResource SonoFont}" /> 
+    </Style>
+    
+    <Style Selector="TextBlock.WordClock[IsEnabled=true]">
+        <Setter Property="Foreground" Value="#666" />
+        <Setter Property="FontSize" Value="56" />
+        <Setter Property="FontFamily" Value="{StaticResource SonoFont}" /> 
+    </Style>
 </Styles>

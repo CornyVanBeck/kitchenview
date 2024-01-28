@@ -17,24 +17,24 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
     
-    <Panel>
-    <Grid>
+    <Grid HorizontalAlignment="Center"> 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         
-        <UserControl Content="{Binding AwesomeCalendar}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
-        <UserControl Content="{Binding Quote}" Grid.Row="0" Grid.Column="1" />
-        
+        <TabControl Margin="5" SelectedIndex="{Binding AwesomeIndex}">
+            <TabItem x:Name="tab1" Header="Tab 1" IsVisible="false" IsSelected="true">
+                <UserControl Content="{Binding AwesomeCalendar}" Margin="-100 0 0 0"/>
+            </TabItem>
+            <TabItem x:Name="tab2" Header="Tab 2" IsVisible="false">
+                <UserControl Content="{Binding AwesomeWordClock}" />
+            </TabItem>
+        </TabControl>
+        <!-- <UserControl Content="{Binding Quote}" Grid.Row="0" Grid.Column="1" /> -->        
         <!-- <UserControl Content="{Binding AwesomeShoppingList}" Grid.Row="1" Grid.Column="1" /> -->
-        <UserControl Content="{Binding AwesomeGallery}" Grid.Row="1" Grid.Column="1" />
+        <!-- <UserControl Content="{Binding AwesomeGallery}" Grid.Row="1" Grid.Column="1" /> -->
     </Grid>
-    <!-- <UserControl Content="{Binding AwesomeWeather}" /> -->
-    </Panel>
 </Window>

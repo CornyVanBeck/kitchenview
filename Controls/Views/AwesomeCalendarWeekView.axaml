@@ -11,46 +11,46 @@
 		<converter:AwesomeTimeConverter x:Key="timeConverter"/>
 	</UserControl.Resources>
 
-	<StackPanel Orientation="Horizontal">
-		<Panel Classes="CalendarWeekIndicator">
-			<Border IsEnabled="{Binding IsCurrent}"/>
-			<TextBlock Text="{Binding CalendarWeek}" IsEnabled="{Binding IsCurrent}">
-				<TextBlock.RenderTransform>
-					<RotateTransform Angle="-90" CenterX="10" CenterY="-50"/>
-				</TextBlock.RenderTransform>
-			</TextBlock>
-		</Panel>
-		<Border Classes="ActiveCalendarWeek" IsEnabled="{Binding IsCurrent}">
-			<ItemsControl Items="{Binding Days}">
-				<ItemsControl.ItemsPanel>
-					<ItemsPanelTemplate>
-						<StackPanel Orientation="Horizontal"/>
-					</ItemsPanelTemplate>
-				</ItemsControl.ItemsPanel>
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<Border Classes="CalendarDay" IsEnabled="{Binding IsCurrent}">
-							<DockPanel  Width="140" Height="140">
-								<TextBlock Text="{Binding DayOfMonth}" IsEnabled="{Binding IsEnabled}" DockPanel.Dock="Top"/>
-								<ListBox Items="{Binding Appointments, Mode=OneWay}" DockPanel.Dock="Top">
-									<ListBox.ItemTemplate>
-										<DataTemplate>
-											<Border Classes="Appointment" Background="{Binding ColorCode, Converter={StaticResource gradientConverter}}">
-												<StackPanel Orientation="Horizontal">
-													<Border>
-														<TextBlock Text="{Binding TimeFrom, Converter={StaticResource timeConverter}}" Classes="AppointmentTime"/>
-													</Border>
-													<TextBlock Text="{Binding Title}" Classes="AppointmentTitle" IsEnabled="{Binding IsLongTitle}"/>
-												</StackPanel>
-											</Border>
-										</DataTemplate>
-									</ListBox.ItemTemplate>
-								</ListBox>
-							</DockPanel>
-						</Border>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
-		</Border>
-	</StackPanel>
+  <StackPanel Orientation="Horizontal">   
+      <Panel Classes="CalendarWeekIndicator">
+        <Border IsEnabled="{Binding IsCurrent}"/>
+        <TextBlock Text="{Binding CalendarWeek}" IsEnabled="{Binding IsCurrent}">
+          <TextBlock.RenderTransform>
+            <RotateTransform Angle="-90" CenterX="10" CenterY="-50"/>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+      </Panel>
+    <Border Classes="ActiveCalendarWeek" IsEnabled="{Binding IsCurrent}">
+      <ItemsControl Items="{Binding Days}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Horizontal"/>
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+              <Border Classes="CalendarDay" IsEnabled="{Binding IsCurrent}">
+                <Canvas  Width="140" Height="130">
+                  <TextBlock Classes="CalendarDayText" Text="{Binding DayOfMonth}" IsEnabled="{Binding IsEnabled}" DockPanel.Dock="Top"/>
+                  <ListBox Items="{Binding Appointments, Mode=OneWay}" DockPanel.Dock="Top">
+                      <ListBox.ItemTemplate>
+                          <DataTemplate>
+                            <Border Classes="Appointment" Background="{Binding ColorCode, Converter={StaticResource gradientConverter}}">
+                              <StackPanel Orientation="Horizontal">
+                                <Border>
+                                  <TextBlock Text="{Binding TimeFrom, Converter={StaticResource timeConverter}}" Classes="AppointmentTime"/>
+                                </Border>
+                                <TextBlock Text="{Binding Title}" Classes="AppointmentTitle" IsEnabled="{Binding IsLongTitle}"/>
+                              </StackPanel>
+                            </Border>
+                          </DataTemplate>
+                      </ListBox.ItemTemplate>
+                  </ListBox>
+                </Canvas>
+              </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </Border>
+  </StackPanel>
 </UserControl>

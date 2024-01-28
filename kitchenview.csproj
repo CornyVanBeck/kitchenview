@@ -19,6 +19,7 @@
   <ItemGroup>
     <Folder Include="Controls\" />
     <Folder Include="Models\" />
+    <Folder Include="Assets\Fonts" />
     <AvaloniaResource Include="Assets\**" />
     <None Remove=".gitignore" />
   </ItemGroup>
