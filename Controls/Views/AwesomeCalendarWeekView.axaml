@@ -30,7 +30,7 @@
         <ItemsControl.ItemTemplate>
           <DataTemplate>
               <Border Classes="CalendarDay" IsEnabled="{Binding IsCurrent}">
-                <Canvas  Width="140" Height="130">
+                <Canvas  Width="140" Height="140">
                   <TextBlock Classes="CalendarDayText" Text="{Binding DayOfMonth}" IsEnabled="{Binding IsEnabled}" DockPanel.Dock="Top"/>
                   <ListBox Items="{Binding Appointments, Mode=OneWay}" DockPanel.Dock="Top">
                       <ListBox.ItemTemplate>

@@ -133,7 +133,7 @@ namespace kitchenview.Controls.ViewModels
                     {
                         var hourToCheck = DateTime.Now.Hour > 12 ? DateTime.Now.Hour - 12 : DateTime.Now.Hour;
                         var minuteToCheck = Convert.ToInt32(DateTime.Now.Minute / 10) * 10;
-                        if (minuteToCheck >= 30)
+                        if (minuteToCheck >= 30 && minuteToCheck < 34)
                         {
                             hourToCheck++;
                         }
@@ -143,7 +143,7 @@ namespace kitchenview.Controls.ViewModels
                     {
                         var hourToCheck = DateTime.Now.Hour > 12 ? DateTime.Now.Hour - 12 : DateTime.Now.Hour;
                         var minuteToCheck = Convert.ToInt32(DateTime.Now.Minute / 10) * 10;
-                        if (minuteToCheck >= 30)
+                        if (minuteToCheck >= 30 && minuteToCheck < 34)
                         {
                             word.IsEnabled = word.Value == minuteToCheck ? true : false;
                             hourToCheck++;
@@ -163,6 +163,11 @@ namespace kitchenview.Controls.ViewModels
                         if (DateTime.Now.Minute >= 45 && DateTime.Now.Minute < 49)
                         {
                             minuteToCheck = 45;
+                        }
+
+                        if (DateTime.Now.Minute >= 5 && DateTime.Now.Minute < 9)
+                        {
+                            minuteToCheck = 5;
                         }
 
                         var minutesUntilToCheck = 60 - minuteToCheck;

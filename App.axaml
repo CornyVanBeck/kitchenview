@@ -12,6 +12,7 @@
 
     <Application.Resources>
         <FontFamily x:Key="MeddonRegularFont">avares://kitchenview/Assets/Fonts/Meddon-Regular.ttf#Meddon</FontFamily>
+        <FontFamily x:Key="UbuntuThinFont">avares://kitchenview/Assets/Fonts/Ubuntu-Th.ttf#Ubuntu</FontFamily>
         <FontFamily x:Key="SonoFont">avares://kitchenview/Assets/Fonts/Sono.ttf#Sono</FontFamily>
     </Application.Resources>
 </Application>
