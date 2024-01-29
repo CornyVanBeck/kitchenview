@@ -96,7 +96,7 @@ namespace kitchenview.DataAccess
             {
                 foreach (CalendarEvent @event in events)
                 {
-                    if (@event.RecurrenceRules.Any())
+                    /*if (@event.RecurrenceRules.Any())
                     {
                         returnValue.Add(new Appointment()
                         {
@@ -107,7 +107,7 @@ namespace kitchenview.DataAccess
                             RepeatingPattern = @event.RecurrenceRules.FirstOrDefault()
                         });
                     }
-                    else if (@event.Start?.Value.Year == DateTime.Today.Year)
+                    else*/ if (@event.Start?.Value.Year == DateTime.Today.Year)
                     {
                         returnValue.Add(new Appointment()
                         {
