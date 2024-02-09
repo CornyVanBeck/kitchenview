@@ -42,7 +42,11 @@ namespace kitchenview.ViewModels
         {
             AwesomeIndex = 0;
             _calendarTimer.Tick += OnCalendarTick;
-            _calendarTimer.Interval = configuration.GetValue<TimeSpan>("Controls:Calendars:ViewTimer");
+            #if DEBUG
+            _calendarTimer.Interval = TimeSpan.FromSeconds(5);
+            #else
+            _calendarTimer.Interval = configuration.GetValue<TimeSpan>("Controls:Calendars:ViewTimer");  
+            #endif          
             _calendarTimer.Start();
 
             _wordClockTimer.Tick += OnWordClockTick;

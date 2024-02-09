@@ -247,7 +247,7 @@
 
     <Style Selector="TextBlock.WordClock">
         <Setter Property="Foreground" Value="#CFCFCF" />
-        <Setter Property="FontSize" Value="64" />
+        <Setter Property="FontSize" Value="62" />
         <Setter Property="FontFamily" Value="{StaticResource SonoFont}" /> 
     </Style>
     

@@ -146,8 +146,6 @@ namespace kitchenview.Controls.ViewModels
                         if (minuteToCheck >= 30 && minuteToCheck < 34)
                         {
                             word.IsEnabled = word.Value == minuteToCheck ? true : false;
-                            hourToCheck++;
-                            word.IsEnabled = word.Value == hourToCheck ? true : false;
                             continue;
                         }
                         word.IsEnabled = word.Special == "ALWAYS_ON" ? true : word.Value == hourToCheck ? true : false;
@@ -198,6 +196,7 @@ namespace kitchenview.Controls.ViewModels
 
             if (_enableBeforeWord)
             {
+                var hourToCheck = DateTime.Now.Hour;
                 foreach (var definition in ListOfDefinitions)
                 {
                     foreach (var word in definition.Words)
@@ -205,7 +204,14 @@ namespace kitchenview.Controls.ViewModels
                         if (word.Special == "BEFORE")
                         {
                             word.IsEnabled = true;
-                            break;
+                            hourToCheck++;
+                            continue;
+                        }
+
+                        if (word.Special == SpecialType.HOUR_WORD.ToString("g") && word.Value == hourToCheck)
+                        {
+                            word.IsEnabled = true;
+                            continue;
                         }
                     }
                 }
