@@ -5,14 +5,20 @@ namespace kitchenview.Models
     [DataContract]
     public class AppointmentConfiguration
     {
+        [DataMember(Name = "Label", IsRequired = true)]
+        public required string Label
+        {
+            get; set;
+        }
+
         [DataMember(Name = "ColorCode", IsRequired = true)]
-        public string ColorCode
+        public required string ColorCode
         {
             get; set;
         }
 
         [DataMember(Name = "Url", IsRequired = true)]
-        public string Url
+        public required string Url
         {
             get; set;
         }

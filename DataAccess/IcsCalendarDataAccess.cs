@@ -79,7 +79,7 @@ namespace kitchenview.DataAccess
                 {
                     var content = response?.Result.Content.ReadAsStringAsync();
                     content.Wait();
-                    return Task.FromResult<string>(content.Result ?? "");
+                    return Task.FromResult(content.Result ?? "");
                 }
             }
             catch (Exception exp)

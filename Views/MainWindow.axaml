@@ -28,12 +28,13 @@
         <TabControl Margin="5" SelectedIndex="{Binding AwesomeIndex}">
             <TabItem x:Name="tab1" Header="Tab 1" IsVisible="false" IsSelected="true">
                 <UserControl Content="{Binding AwesomeCalendar}" Margin="-100 0 0 0"/>
+                <!-- <UserControl Content="{Binding AwesomeCountdown}" /> -->
             </TabItem>
             <TabItem x:Name="tab2" Header="Tab 2" IsVisible="false">
                 <UserControl Content="{Binding AwesomeWordClock}" />
             </TabItem>
         </TabControl>
-        <!-- <UserControl Content="{Binding Quote}" Grid.Row="0" Grid.Column="1" /> -->        
+        <!-- <UserControl Content="{Binding Quote}" Grid.Row="0" Grid.Column="1" />         -->
         <!-- <UserControl Content="{Binding AwesomeShoppingList}" Grid.Row="1" Grid.Column="1" /> -->
         <!-- <UserControl Content="{Binding AwesomeGallery}" Grid.Row="1" Grid.Column="1" /> -->
     </Grid>

@@ -6,6 +6,7 @@ using kitchenview.Models;
 using kitchenview.ViewModels;
 using kitchenview.Views;
 using Microsoft.Extensions.Configuration;
+using openmeteo_sdk;
 using RestSharp;
 using Serilog;
 using Splat;
@@ -20,7 +21,7 @@ namespace kitchenview
     {
         private readonly HttpClient client = new HttpClient();
 
-        private readonly RestClient restClient = new RestClient();
+        //private readonly RestClient restClient = new RestClient();
 
         private readonly IConfiguration configuration;
 
@@ -51,8 +52,9 @@ namespace kitchenview
         {
             Locator.CurrentMutable.UseSerilogFullLogger();
             Locator.CurrentMutable.RegisterConstant<IDataAccess<Appointment>>(new IcsCalendarDataAccess(configuration, client));
-            //Locator.CurrentMutable.RegisterConstant<IDataAccess<IQuote>>(new QuoteDataAccess(configuration, client));
-            //Locator.CurrentMutable.RegisterConstant<IDataAccess<PhotoprismImage>>(new PhotoprismGalleryDataAccess(configuration, client));
+            Locator.CurrentMutable.RegisterConstant<IDataAccess<Weather>>(new WeatherDataAccess(configuration, client));
+            //Locator.CurrentMutable.RegisterConstant<IDataAccess<IQuote>>(new QuoteDataAccess(configuration, restClient));
+            //Locator.CurrentMutable.RegisterConstant<IDataAccess<PhotoprismImage>>(new PhotoprismGalleryDataAccess(configuration, restClient));
             //Locator.CurrentMutable.RegisterConstant<IDataAccess<TodoistShoppingListEntry>>(new TodoistDataAccess(configuration));
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

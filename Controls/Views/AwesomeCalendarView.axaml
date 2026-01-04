@@ -1,36 +1,76 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="using:kitchenview.Controls.Views"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="kitchenview.Controls.Views.AwesomeCalendarView">
+<UserControl
+  x:Class="kitchenview.Controls.Views.AwesomeCalendarView"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="using:kitchenview.Controls.Views"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  mc:Ignorable="d">
 
-<StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-    <Panel Width="180" Height="500"> 
-      <TextBlock Text="{Binding CurrentMonth}" Classes="CalendarTitle" Height="110" Width="500" Margin="-75 0 0 0">
+  <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+    <Panel Width="180" Height="500">
+      <TextBlock
+        Width="500"
+        Height="110"
+        Margin="-75,0,0,0"
+        Classes="CalendarTitle"
+        Text="{Binding CurrentMonth}">
         <TextBlock.RenderTransform>
-          <RotateTransform Angle="-90" CenterX="75" CenterY="0"/>
+          <RotateTransform Angle="-90" CenterX="75" CenterY="0" />
         </TextBlock.RenderTransform>
-      </TextBlock> 
+      </TextBlock>
     </Panel>
-  <StackPanel HorizontalAlignment="Left">
-      <StackPanel Orientation="Horizontal" Margin="25 0 0 0"> 
-        <TextBlock Text="Montag" Width="140" TextAlignment="Center"/>
-        <TextBlock Text="Dienstag" Width="140" TextAlignment="Center"/>
-        <TextBlock Text="Mittwoch" Width="140" TextAlignment="Center"/>
-        <TextBlock Text="Donnerstag" Width="140" TextAlignment="Center"/>
-        <TextBlock Text="Freitag" Width="140" TextAlignment="Center"/>
-        <TextBlock Text="Samstag" Width="140" TextAlignment="Center"/>
-        <TextBlock Text="Sonntag" Width="140" TextAlignment="Center"/>
-      </StackPanel> 
-      <ItemsControl Items="{Binding Weeks}">             
-          <ItemsControl.ItemTemplate>                      
-            <DataTemplate>
-              <local:AwesomeCalendarWeekView />
-            </DataTemplate>
-          </ItemsControl.ItemTemplate>
+    <StackPanel HorizontalAlignment="Left">
+      <StackPanel Margin="25,0,0,0" Orientation="Horizontal">
+        <TextBlock
+          Width="140"
+          Text="Montag"
+          TextAlignment="Center" />
+        <TextBlock
+          Width="140"
+          Text="Dienstag"
+          TextAlignment="Center" />
+        <TextBlock
+          Width="140"
+          Text="Mittwoch"
+          TextAlignment="Center" />
+        <TextBlock
+          Width="140"
+          Text="Donnerstag"
+          TextAlignment="Center" />
+        <TextBlock
+          Width="140"
+          Text="Freitag"
+          TextAlignment="Center" />
+        <TextBlock
+          Width="140"
+          Text="Samstag"
+          TextAlignment="Center" />
+        <TextBlock
+          Width="140"
+          Text="Sonntag"
+          TextAlignment="Center" />
+      </StackPanel>
+      <ItemsControl Items="{Binding Weeks}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <local:AwesomeCalendarWeekView />
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
       </ItemsControl>
+    </StackPanel>
+    <Panel Classes="AppointmentConfiguration">
+      <ListBox DockPanel.Dock="Top" Items="{Binding ConfigurationEntries, Mode=OneWay}">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Border Background="{Binding ColorCode}">
+              <TextBlock Text="{Binding Label}" />
+            </Border>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </Panel>
   </StackPanel>
-</StackPanel>
 </UserControl>

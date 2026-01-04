@@ -4,9 +4,18 @@ namespace kitchenview.Models
 {
     public enum SpecialType
     {
+        NONE,
         MERGE_WITH_NEXT,
         ALWAYS_ON,
-        HOUR_WORD
+        HOUR_WORD,
+        BEFORE,
+        AFTER
+    }
+
+    public enum Type
+    {
+        HOUR,
+        MINUTE
     }
 
     [DataContract]
@@ -20,6 +29,9 @@ namespace kitchenview.Models
 
         [DataMember(Name = "Special")]
         public string? Special { get; set; }
+
+        [DataMember(Name = "Type")]
+        public string? Type { get; set; }
 
         public bool IsEnabled { get; set; }
     }

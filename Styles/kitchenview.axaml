@@ -1,157 +1,173 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style Selector="Window">
-        <Setter Property="Background" Value="#fff4e6"/>
-        <Setter Property="FontFamily" Value="{StaticResource UbuntuThinFont}"/>  
-        <Setter Property="FontWeight" Value="Light"/>
-    </Style>
-
-    <Style Selector="TextBlock.CalendarTitle">
-        <Setter Property="FontSize" Value="64"/>
-        <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="FontFamily" Value="{StaticResource MeddonRegularFont}"/>    
-    </Style>
-
-    <Style Selector="Border.ActiveCalendarWeek[IsEnabled=true]">
-        <Setter Property="BorderBrush">
-            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-                <LinearGradientBrush.GradientStops>
-                  <GradientStop Offset="0" Color="#ffe77e" />
-                  <GradientStop Offset="1" Color="#cb7e23" />
-                </LinearGradientBrush.GradientStops>
-              </LinearGradientBrush>
-        </Setter>
-        <Setter Property="BorderThickness" Value="2"/>
-    </Style>
-
-	<Style Selector="Panel.CalendarWeekIndicator TextBlock">
-		<Setter Property="Padding" Value="5"/>
-		<Setter Property="Foreground" Value="#333"/>
-		<Setter Property="FontWeight" Value="Bold"/>
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Style Selector="Window">
+		<Setter Property="Background" Value="#1e1e2e" />
+		<Setter Property="FontFamily" Value="{StaticResource UbuntuThinFont}" />
+		<Setter Property="FontWeight" Value="Light" />
 	</Style>
 
-    <Style Selector="Panel.CalendarWeekIndicator Border">
-        <Setter Property="Padding" Value="5"/>
-        <Setter Property="Background" Value="#ffe77e"/>
-        <Setter Property="CornerRadius" Value="10 0 0 10"/>
-    </Style>
+	<Style Selector="TextBlock.CalendarTitle">
+		<Setter Property="FontSize" Value="64" />
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="FontFamily" Value="{StaticResource UbuntuThinFont}" />
+	</Style>
+
+	<Style Selector="Border.ActiveCalendarWeek[IsEnabled=true]">
+		<Setter Property="BorderBrush">
+			<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+				<LinearGradientBrush.GradientStops>
+					<GradientStop Offset="0" Color="#9399b2" />
+					<GradientStop Offset="1" Color="#6c7086" />
+				</LinearGradientBrush.GradientStops>
+			</LinearGradientBrush>
+		</Setter>
+		<Setter Property="BorderThickness" Value="2" />
+	</Style>
+
+	<Style Selector="Panel.CalendarWeekIndicator TextBlock">
+		<Setter Property="Padding" Value="5" />
+		<Setter Property="Foreground" Value="#181825" />
+		<Setter Property="FontWeight" Value="Bold" />
+	</Style>
+
+	<Style Selector="Panel.CalendarWeekIndicator Border">
+		<Setter Property="Padding" Value="5" />
+		<Setter Property="Background" Value="#9399b2" />
+		<Setter Property="CornerRadius" Value="10 0 0 10" />
+	</Style>
 
 	<Style Selector="Panel.CalendarWeekIndicator TextBlock[IsEnabled=false]">
-		<Setter Property="Padding" Value="5"/>
-		<Setter Property="Foreground" Value="#999"/>
-		<Setter Property="FontWeight" Value="Light"/>
+		<Setter Property="Padding" Value="5" />
+		<Setter Property="Foreground" Value="#cdd6f4" />
+		<Setter Property="FontWeight" Value="Light" />
 	</Style>
 
 	<Style Selector="Panel.CalendarWeekIndicator Border[IsEnabled=false]">
-		<Setter Property="Padding" Value="5"/>
+		<Setter Property="Padding" Value="5" />
 		<Setter Property="Background">
 			<LinearGradientBrush StartPoint="100%,0%" EndPoint="100%,100%">
 				<LinearGradientBrush.GradientStops>
-					<GradientStop Offset="0" Color="#FFF" />
-					<GradientStop Offset="1" Color="#EFEFEF" />
+					<GradientStop Offset="0" Color="#181825" />
+					<GradientStop Offset="1" Color="#181825" />
 				</LinearGradientBrush.GradientStops>
 			</LinearGradientBrush>
 		</Setter>
-		<Setter Property="CornerRadius" Value="10 0 0 10"/>
+		<Setter Property="CornerRadius" Value="10 0 0 10" />
 	</Style>
 
 	<Style Selector="Border.CalendarDay">
+		<Setter Property="Padding" Value="0 2 0 0" />
+		<Setter Property="BorderBrush" Value="#181825" />
+		<Setter Property="BorderThickness" Value="1" />
 		<Setter Property="Background">
 			<LinearGradientBrush StartPoint="100%,0%" EndPoint="100%,100%">
 				<LinearGradientBrush.GradientStops>
-					<GradientStop Offset="0" Color="#FFF" />
-					<GradientStop Offset="1" Color="#EFEFEF" />
+					<GradientStop Offset="0" Color="#313244" />
+					<GradientStop Offset="1" Color="#313244" />
 				</LinearGradientBrush.GradientStops>
 			</LinearGradientBrush>
 		</Setter>
 	</Style>
 
-    <Style Selector="Border.CalendarDay[IsEnabled=true]">
-        <Setter Property="Background">
-            <LinearGradientBrush StartPoint="100%,0%" EndPoint="100%,100%">
-                <LinearGradientBrush.GradientStops>
-                  <GradientStop Offset="0" Color="#fff4e6" />
-                  <GradientStop Offset="1" Color="#FFF" />
-                </LinearGradientBrush.GradientStops>
-              </LinearGradientBrush>
-        </Setter>
-    </Style>
-
-	<Style Selector="Border.CalendarDay">
-		<Setter Property="BorderBrush" Value="#EFEFEF"/>
-		<Setter Property="BorderThickness" Value="1"/>
+	<Style Selector="Border.CalendarDay[IsEnabled=true]">
+		<Setter Property="Background">
+			<LinearGradientBrush StartPoint="100%,0%" EndPoint="100%,100%">
+				<LinearGradientBrush.GradientStops>
+					<GradientStop Offset="0" Color="#585b70" />
+					<GradientStop Offset="1" Color="#585b70" />
+				</LinearGradientBrush.GradientStops>
+			</LinearGradientBrush>
+		</Setter>
 	</Style>
 
 	<Style Selector="Border.CalendarDay ListBox">
-		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Background" Value="Transparent" />
 	</Style>
 
 	<Style Selector="Border.CalendarDay ListBox ListBoxItem">
-		<Setter Property="Padding" Value="2 1 2 1"/>
+		<Setter Property="Padding" Value="2 1 2 1" />
 	</Style>
 
-    <Style Selector="Border.CalendarDay TextBlock">
-        <Setter Property="Padding" Value="5"/>
-        <Setter Property="Foreground" Value="#EFEFEF"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
+	<Style Selector="Border.CalendarDay TextBlock">
+		<Setter Property="Padding" Value="5" />
+		<Setter Property="Foreground" Value="#EFEFEF" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
 
-    <Style Selector="TextBlock.CalendarDayText">
-        <Setter Property="Padding" Value="15 5 5 5"/>
-        <Setter Property="Foreground" Value="#999"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="104"/>
-    </Style>
+	<Style Selector="TextBlock.CalendarDayText">
+		<Setter Property="Padding" Value="15 5 5 5" />
+		<Setter Property="Foreground" Value="#cdd6f4" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="FontSize" Value="104" />
+	</Style>
 
-    <Style Selector="TextBlock.CalendarDayText[IsEnabled=false]">
-        <Setter Property="Foreground" Value="#EFEFEF"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
+	<Style Selector="TextBlock.CalendarDayText[IsEnabled=false]">
+		<Setter Property="Foreground" Value="#45475a" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
 
 	<Style Selector="Border.Appointment">
-		<Setter Property="BorderBrush" Value="#16537e" />
-		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="CornerRadius" Value="5" />
-		<Setter Property="Width" Value="136" />
+		<Setter Property="Width" Value="138" />
 	</Style>
 
 	<Style Selector="TextBlock.AppointmentTime">
-		<Setter Property="FontSize" Value="12"/>
-		<Setter Property="Foreground" Value="white"/>
+		<Setter Property="FontSize" Value="12" />
+		<Setter Property="Foreground" Value="#cdd6f4" />
 	</Style>
 
 	<Style Selector="Border.Appointment StackPanel Border">
-		<Setter Property="Background" Value="#666666"/>
-		<Setter Property="CornerRadius" Value="5 0 0 5"/>
-		<Setter Property="ZIndex" Value="1"/>
+		<Setter Property="Background" Value="#585b70" />
+		<Setter Property="CornerRadius" Value="5 0 0 5" />
+		<Setter Property="ZIndex" Value="1" />
 	</Style>
 
 	<Style Selector="TextBlock.AppointmentTitle">
-		<Setter Property="FontSize" Value="12"/>
-		<Setter Property="Foreground" Value="white"/>
+		<Setter Property="FontSize" Value="12" />
+		<Setter Property="Foreground" Value="#11111b" />
 	</Style>
 
 	<Style Selector="TextBlock.AppointmentTitle[IsEnabled=true]">
-		<Setter Property="FontSize" Value="12"/>
-		<Setter Property="Foreground" Value="white"/>
-		<Setter Property="ZIndex" Value="-1"/>
+		<Setter Property="FontSize" Value="12" />
+		<Setter Property="FontWeight" Value="Medium" />
+		<Setter Property="Foreground" Value="#11111b" />
+		<Setter Property="ZIndex" Value="-1" />
 		<Style.Animations>
-			<Animation Duration="0:0:15" Delay="0:0:0" IterationCount="INFINITE">
+			<Animation
+				Delay="0:0:0"
+				IterationCount="INFINITE"
+				Duration="0:0:15">
 				<KeyFrame Cue="0%">
-					<Setter Property="Margin" Value="280 0 0 0"/>
+					<Setter Property="Margin" Value="280 0 0 0" />
 				</KeyFrame>
 				<KeyFrame Cue="100%">
-					<Setter Property="Margin" Value="-280 0 0 0"/>
+					<Setter Property="Margin" Value="-280 0 0 0" />
 				</KeyFrame>
 			</Animation>
 		</Style.Animations>
 	</Style>
 
+	<Style Selector="Panel.AppointmentConfiguration ListBox">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Margin" Value="15 0 0 0" />
+	</Style>
+
+	<Style Selector="Panel.AppointmentConfiguration TextBlock">
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontWeight" Value="Medium" />
+		<Setter Property="Foreground" Value="#11111b" />
+		<Setter Property="Padding" Value="5 2 2 2" />
+	</Style>
+
+	<Style Selector="Panel.AppointmentConfiguration Border">
+		<Setter Property="CornerRadius" Value="5" />
+		<Setter Property="Width" Value="138" />
+	</Style>
+
 	<Style Selector="Border.Quote">
-		<Setter Property="BoxShadow" Value="5 5 10 2 #222"/>
+		<Setter Property="BoxShadow" Value="5 5 10 2 #181825" />
 		<Setter Property="BorderBrush">
 			<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
 				<LinearGradientBrush.GradientStops>
@@ -160,8 +176,8 @@
 				</LinearGradientBrush.GradientStops>
 			</LinearGradientBrush>
 		</Setter>
-		<Setter Property="BorderThickness" Value="3"/>
-		<Setter Property="Margin" Value="10 10 10 10"/>
+		<Setter Property="BorderThickness" Value="3" />
+		<Setter Property="Margin" Value="10 10 10 10" />
 		<Setter Property="Background">
 			<LinearGradientBrush StartPoint="100%,0%" EndPoint="100%,100%">
 				<LinearGradientBrush.GradientStops>
@@ -170,31 +186,31 @@
 				</LinearGradientBrush.GradientStops>
 			</LinearGradientBrush>
 		</Setter>
-		<Setter Property="MaxHeight" Value="400"/>
-		<Setter Property="CornerRadius" Value="50 0 50 0"/>
+		<Setter Property="MaxHeight" Value="400" />
+		<Setter Property="CornerRadius" Value="50 0 50 0" />
 	</Style>
 
 	<Style Selector="StackPanel.Quote">
-		<Setter Property="HorizontalAlignment" Value="Center"/>
-		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
 	</Style>
 
 	<Style Selector="TextBlock.Quote">
-		<Setter Property="FontFamily" Value="Ubuntu Thin"/>
-		<Setter Property="FontWeight" Value="Light"/>
-		<Setter Property="FontSize" Value="20"/>
-		<Setter Property="TextAlignment" Value="Center"/>
-		<Setter Property="Padding" Value="10 10 50 10"/>
-		<Setter Property="Foreground" Value="#333"/>
+		<Setter Property="FontFamily" Value="Ubuntu Thin" />
+		<Setter Property="FontWeight" Value="Light" />
+		<Setter Property="FontSize" Value="20" />
+		<Setter Property="TextAlignment" Value="Center" />
+		<Setter Property="Padding" Value="10 10 50 10" />
+		<Setter Property="Foreground" Value="#333" />
 	</Style>
 
 	<Style Selector="TextBlock.Author">
-		<Setter Property="FontFamily" Value="Ubuntu Thin"/>
-		<Setter Property="FontWeight" Value="Light"/>
-		<Setter Property="FontSize" Value="10"/>
-		<Setter Property="TextAlignment" Value="Left"/>
-		<Setter Property="Margin" Value="0 0 10 0"/>
-		<Setter Property="Foreground" Value="#333"/>
+		<Setter Property="FontFamily" Value="Ubuntu Thin" />
+		<Setter Property="FontWeight" Value="Light" />
+		<Setter Property="FontSize" Value="10" />
+		<Setter Property="TextAlignment" Value="Left" />
+		<Setter Property="Margin" Value="0 0 10 0" />
+		<Setter Property="Foreground" Value="#333" />
 	</Style>
 
 	<Style Selector="Border.Blurred">
@@ -202,7 +218,7 @@
 	</Style>
 
 	<Style Selector="Border.ShoppingList">
-		<Setter Property="BoxShadow" Value="5 5 10 2 #222"/>
+		<Setter Property="BoxShadow" Value="5 5 10 2 #181825" />
 		<Setter Property="BorderBrush">
 			<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
 				<LinearGradientBrush.GradientStops>
@@ -211,8 +227,8 @@
 				</LinearGradientBrush.GradientStops>
 			</LinearGradientBrush>
 		</Setter>
-		<Setter Property="BorderThickness" Value="3"/>
-		<Setter Property="Margin" Value="10 10 10 10"/>
+		<Setter Property="BorderThickness" Value="3" />
+		<Setter Property="Margin" Value="10 10 10 10" />
 		<Setter Property="Background">
 			<LinearGradientBrush StartPoint="100%,0%" EndPoint="100%,100%">
 				<LinearGradientBrush.GradientStops>
@@ -224,34 +240,40 @@
 	</Style>
 
 	<Style Selector="Border.ShoppingList TextBlock">
-		<Setter Property="FontFamily" Value="Ubuntu Thin"/>
-		<Setter Property="FontWeight" Value="Light"/>
-		<Setter Property="FontSize" Value="14"/>
-		<Setter Property="Foreground" Value="#333"/>
-		<Setter Property="Padding" Value="7 2 2 2"/>
+		<Setter Property="FontFamily" Value="Ubuntu Thin" />
+		<Setter Property="FontWeight" Value="Light" />
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="Foreground" Value="#333" />
+		<Setter Property="Padding" Value="7 2 2 2" />
 	</Style>
 
-    <Style Selector="Border.Weather">
-        <Setter Property="ZIndex" Value="10"/>
-        <Setter Property="Height" Value="75"/>
-        <Setter Property="Background" Value="#333"/>
-        <Setter Property="OpacityMask">
-            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
-                <LinearGradientBrush.GradientStops>
-                  <GradientStop Offset="0" Color="Transparent" />
-                  <GradientStop Offset="1" Color="Black" />
-                </LinearGradientBrush.GradientStops>
-              </LinearGradientBrush>
-        </Setter>
-    </Style>
+	<Style Selector="Border.Weather">
+		<Setter Property="ZIndex" Value="10" />
+		<Setter Property="Height" Value="75" />
+		<Setter Property="Background" Value="#333" />
+		<Setter Property="OpacityMask">
+			<LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+				<LinearGradientBrush.GradientStops>
+					<GradientStop Offset="0" Color="Transparent" />
+					<GradientStop Offset="1" Color="Black" />
+				</LinearGradientBrush.GradientStops>
+			</LinearGradientBrush>
+		</Setter>
+	</Style>
 
-    <Style Selector="TextBlock.WordClock">
-        <Setter Property="Foreground" Value="#CFCFCF" />
-        <Setter Property="FontSize" Value="62" />
-        <Setter Property="FontFamily" Value="{StaticResource SonoFont}" /> 
-    </Style>
-    
-    <Style Selector="TextBlock.WordClock[IsEnabled=true]">
-        <Setter Property="Foreground" Value="#666" />
-    </Style>
+	<Style Selector="TextBlock.WordClock">
+		<Setter Property="Foreground" Value="#181825" />
+		<Setter Property="FontSize" Value="62" />
+		<Setter Property="FontFamily" Value="{StaticResource SonoFont}" />
+	</Style>
+
+	<Style Selector="TextBlock.WordClock[IsEnabled=true]">
+		<Setter Property="Foreground" Value="#cdd6f4" />
+	</Style>
+
+	<Style Selector="TextBlock.Countdown">
+		<Setter Property="Foreground" Value="#000" />
+		<Setter Property="FontSize" Value="120" />
+		<Setter Property="FontFamily" Value="{StaticResource AdventProFont}" />
+	</Style>
 </Styles>

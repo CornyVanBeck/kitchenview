@@ -5,7 +5,6 @@ using Splat;
 using kitchenview.DataAccess;
 using Microsoft.Extensions.Configuration;
 using Avalonia.Threading;
-using System.Diagnostics;
 using System.ComponentModel;
 using ReactiveUI;
 
@@ -16,6 +15,7 @@ namespace kitchenview.ViewModels
         private readonly IConfiguration configuration;
 
         private readonly DispatcherTimer _calendarTimer = new DispatcherTimer();
+
         private readonly DispatcherTimer _wordClockTimer = new DispatcherTimer();
 
         private int _awesomeIndex;
@@ -38,12 +38,14 @@ namespace kitchenview.ViewModels
 
         public AwesomeWordClockViewModel AwesomeWordClock { get; }
 
+        public AwesomeCountdownViewModel AwesomeCountdown { get; }
+
         public MainWindowViewModel(IConfiguration configuration)
         {
             AwesomeIndex = 0;
             _calendarTimer.Tick += OnCalendarTick;
             #if DEBUG
-            _calendarTimer.Interval = TimeSpan.FromSeconds(5);
+            _calendarTimer.Interval = TimeSpan.FromSeconds(500);
             #else
             _calendarTimer.Interval = configuration.GetValue<TimeSpan>("Controls:Calendars:ViewTimer");  
             #endif          
@@ -60,6 +62,7 @@ namespace kitchenview.ViewModels
 
             AwesomeCalendar = new AwesomeCalendarViewModel(configuration, calendarService!);
             AwesomeWordClock = new AwesomeWordClockViewModel(configuration);
+            AwesomeCountdown = new AwesomeCountdownViewModel(configuration);
             //Quote = new QuoteViewModel(configuration, quoteService!);
             //AwesomeGallery = new AwesomeGalleryViewModel(configuration, galleryService!);
             //AwesomeShoppingList = new AwesomeShoppingListViewModel(configuration, shoppingListService!);

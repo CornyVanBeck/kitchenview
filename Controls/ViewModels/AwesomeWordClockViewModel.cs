@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Timers;
 using Avalonia.Threading;
@@ -16,9 +17,13 @@ namespace kitchenview.Controls.ViewModels
     {
         private readonly DispatcherTimer _timer = new DispatcherTimer();
 
-        private bool _enableAfterWord;
+        private int _hourToAdd = 0;
 
-        private bool _enableBeforeWord;
+        private int _fastForwardMinute = 0;
+
+        private int _fastForwardHour = DateTime.Now.Hour > 12 ? DateTime.Now.Hour - 12 : DateTime.Now.Hour;
+
+        private SpecialType _beforeAndAfterState;
 
         public List<WordClockConfigDefinition> ListOfDefinitions
         {
@@ -41,16 +46,6 @@ namespace kitchenview.Controls.ViewModels
                 if (wordClockConfig.SpaceFiller == SpaceFillerType.RANDOM_LETTER.ToString("g"))
                 {
                     var longestWord = 12;
-                    /* foreach (var definition in wordClockConfig.Definitions)
-                    {
-                        foreach (var word in definition.Words)
-                        {
-                            if (longestWord < word.Word.Length)
-                            {
-                                longestWord = word.Word.Length;
-                            }
-                        }
-                    } */
 
                     ListOfDefinitions = new List<WordClockConfigDefinition>();
                     foreach (var definition in wordClockConfig.Definitions)
@@ -113,7 +108,11 @@ namespace kitchenview.Controls.ViewModels
                 UpdateClock();
             }
 
-            _timer.Interval = TimeSpan.FromSeconds(30);
+#if DEBUG
+            _timer.Interval = TimeSpan.FromMilliseconds(500);
+#else
+            _timer.Interval = TimeSpan.FromSeconds(5);
+#endif
             _timer.Tick += OnTick;
             _timer.Start();
         }
@@ -125,129 +124,144 @@ namespace kitchenview.Controls.ViewModels
 
         private void UpdateClock()
         {
-            foreach (var definition in ListOfDefinitions)
+#if DEBUG
+            if (_fastForwardHour == 12)
             {
-                foreach (var word in definition.Words)
+                _fastForwardHour = 0;
+            }
+
+            if (_fastForwardMinute == 60)
+            {
+                _fastForwardHour++;
+                _fastForwardMinute = 0;
+            }
+            _fastForwardMinute++;
+            Debug.WriteLine(_fastForwardHour.ToString("00") + ":" + _fastForwardMinute.ToString("00"));
+#endif
+            _ = CurrentMinute();
+            _ = CurrentHour();
+            var alwaysOn = ListOfDefinitions.SelectMany(entry => entry.Words)
+                                            .Where(entry => entry.Special == SpecialType.ALWAYS_ON.ToString("g"));
+            foreach (var word in alwaysOn)
+            {
+                word.IsEnabled = true;
+            }
+
+            var beforeAndAfter = ListOfDefinitions.SelectMany(entry => entry.Words)
+                                            .Where(entry => entry.Special == SpecialType.BEFORE.ToString("g") ||
+                                                            entry.Special == SpecialType.AFTER.ToString("g"));
+            foreach (var word in beforeAndAfter)
+            {
+                word.IsEnabled = false;
+                if (_beforeAndAfterState == SpecialType.AFTER &&
+                word.Special == SpecialType.AFTER.ToString("g"))
                 {
-                    if (definition.Index >= 5)
-                    {
-                        var hourToCheck = DateTime.Now.Hour > 12 ? DateTime.Now.Hour - 12 : DateTime.Now.Hour;
-                        var minuteToCheck = Convert.ToInt32(DateTime.Now.Minute / 10) * 10;
-                        if (minuteToCheck >= 30 && minuteToCheck < 34)
-                        {
-                            hourToCheck++;
-                        }
-                        word.IsEnabled = word.Special == "ALWAYS_ON" ? true : word.Value == hourToCheck ? true : false;
-                    }
-                    else if (definition.Index == 4)
-                    {
-                        var hourToCheck = DateTime.Now.Hour > 12 ? DateTime.Now.Hour - 12 : DateTime.Now.Hour;
-                        var minuteToCheck = Convert.ToInt32(DateTime.Now.Minute / 10) * 10;
-                        if (minuteToCheck >= 30 && minuteToCheck < 34)
-                        {
-                            word.IsEnabled = word.Value == minuteToCheck ? true : false;
-                            continue;
-                        }
-                        word.IsEnabled = word.Special == "ALWAYS_ON" ? true : word.Value == hourToCheck ? true : false;
-                    }
-                    else
-                    {
-                        var minuteToCheck = DateTime.Now.Minute > 10 ? Convert.ToInt32(DateTime.Now.Minute / 10) * 10 : DateTime.Now.Minute;
-                        if (DateTime.Now.Minute >= 15 && DateTime.Now.Minute < 19)
-                        {
-                            minuteToCheck = 15;
-                        }
+                    word.IsEnabled = true;
+                }
 
-                        if (DateTime.Now.Minute >= 45 && DateTime.Now.Minute < 49)
-                        {
-                            minuteToCheck = 45;
-                        }
-
-                        if (DateTime.Now.Minute >= 5 && DateTime.Now.Minute < 9)
-                        {
-                            minuteToCheck = 5;
-                        }
-
-                        var minutesUntilToCheck = 60 - minuteToCheck;
-                        var isSpecial = word.Special == SpecialType.ALWAYS_ON.ToString("g") ||
-                                        word.Special == SpecialType.HOUR_WORD.ToString("g");
-                        word.IsEnabled = isSpecial ?
-                                        true : word.Value == minuteToCheck ?
-                                        EnableAfterWord() : word.Value == minutesUntilToCheck ?
-                                        EnableBeforeWord() : false;
-                    }
+                if (_beforeAndAfterState == SpecialType.BEFORE &&
+                word.Special == SpecialType.BEFORE.ToString("g"))
+                {
+                    word.IsEnabled = true;
                 }
             }
 
-            if (_enableAfterWord)
+            var oClock = ListOfDefinitions.SelectMany(entry => entry.Words)
+                                        .Where(entry => entry.Special == SpecialType.HOUR_WORD.ToString("g"))
+                                        .FirstOrDefault();
+            if (CurrentMinute() == 0 && oClock is not null)
             {
-                foreach (var definition in ListOfDefinitions)
-                {
-                    foreach (var word in definition.Words)
-                    {
-                        if (word.Special == "AFTER")
-                        {
-                            word.IsEnabled = true;
-                            break;
-                        }
-                    }
-                }
+                oClock.IsEnabled = true;
+            }
+            else if (oClock is not null)
+            {
+                oClock.IsEnabled = false;
             }
 
-            if (_enableBeforeWord)
-            {
-                var hourToCheck = DateTime.Now.Hour;
-                foreach (var definition in ListOfDefinitions)
-                {
-                    foreach (var word in definition.Words)
-                    {
-                        if (word.Special == "BEFORE")
-                        {
-                            word.IsEnabled = true;
-                            hourToCheck++;
-                            continue;
-                        }
+            EnableMinutes(ListOfDefinitions.SelectMany(entry => entry.Words)
+                                            .Where(entry => entry.Type == "MINUTE"));
 
-                        if (word.Special == SpecialType.HOUR_WORD.ToString("g") && word.Value == hourToCheck)
-                        {
-                            word.IsEnabled = true;
-                            continue;
-                        }
-                    }
-                }
-            }
-
-            foreach (var definition in ListOfDefinitions)
-            {
-                foreach (var word in definition.Words)
-                {
-                    if (word.Special == SpecialType.HOUR_WORD.ToString("g"))
-                    {
-                        word.IsEnabled = false;
-                        if (DateTime.Now.Minute >= 0 && DateTime.Now.Minute < 4)
-                        {
-                            word.IsEnabled = true;
-                        }
-                        break;
-                    }
-                }
-            }
+            EnableHour(ListOfDefinitions.SelectMany(entry => entry.Words)
+                                            .Where(entry => entry.Type == "HOUR")
+                                            );
 
             Definitions = new ObservableCollection<WordClockConfigDefinition>(ListOfDefinitions);
         }
 
-        internal bool EnableAfterWord()
+        internal void EnableHour(IEnumerable<WordClockConfigDefinitionWord> words)
         {
-            _enableAfterWord = true;
-            _enableBeforeWord = false;
-            return true;
+            foreach (var word in words)
+            {
+                word.IsEnabled = false;
+                var hourToCheck = CurrentHour() + _hourToAdd;
+                if (word.Value == (hourToCheck> 12 ? hourToCheck - 12 : hourToCheck))
+                {
+                    word.IsEnabled = true;
+                }
+            }
         }
 
-        internal bool EnableBeforeWord()
+        internal bool EnableMinutes(IEnumerable<WordClockConfigDefinitionWord> words)
         {
-            _enableAfterWord = false;
-            _enableBeforeWord = true;
-            return true;
+            foreach (var word in words)
+            {
+                word.IsEnabled = false;
+                if (word.Value == CurrentMinute())
+                {
+                    word.IsEnabled = true;
+                }
+            }
+
+            return false;
+        }
+
+        internal int CurrentMinute()
+        {
+            _beforeAndAfterState = SpecialType.NONE;
+            _hourToAdd = 0;
+            var minute = DateTime.Now.Minute;
+#if DEBUG
+            minute = _fastForwardMinute;
+#endif
+            var minuteToCheck = Convert.ToInt32(minute / 10) * 10;
+            if (minute >= 5 && minuteToCheck < 30)
+            {
+                _beforeAndAfterState = SpecialType.AFTER;
+            }
+            else if (minuteToCheck == 30)
+            {
+                _beforeAndAfterState = SpecialType.NONE;
+                _hourToAdd = 1;
+            }
+            else if (minute >= 40)
+            {
+                minuteToCheck = 60 - minuteToCheck;
+                _beforeAndAfterState = SpecialType.BEFORE;
+                _hourToAdd = 1;
+            }
+
+            if ((minute >= 5 && minute < 10) ||
+            (minute >= 55 && minute < 60))
+            {
+                return 5;
+            }
+
+            if ((minute >= 15 && minute < 20) ||
+            (minute >= 45 && minute < 50))
+            {
+                return 15;
+            }
+
+            return minuteToCheck;
+        }
+
+        internal int CurrentHour()
+        {
+            var hourToCheck = DateTime.Now.Hour > 12 ? DateTime.Now.Hour - 12 : DateTime.Now.Hour;
+#if DEBUG
+            hourToCheck = _fastForwardHour;
+#endif
+            return hourToCheck == 0 ? 12 : hourToCheck;
         }
     }
 }

@@ -10,18 +10,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using kitchenview.Models;
-using kitchenview.ViewModels;
 using System.Globalization;
-using kitchenview.DataAccess;
-using Splat;
-using Microsoft.Extensions.Configuration;
 using System.Timers;
 using System.Diagnostics;
-using ReactiveUI;
-using kitchenview.Helper.Comparer;
-using kitchenview.Helper.Extensions;
-
+using DynamicData;
 namespace kitchenview.Controls.ViewModels
 {
     public class AwesomeCalendarViewModel : ViewModelBase
@@ -49,6 +41,11 @@ namespace kitchenview.Controls.ViewModels
             get;
         }
 
+        public ObservableCollection<AppointmentConfiguration> ConfigurationEntries
+        {
+            get;
+        }
+
         public string? CurrentMonth
         {
             get; set;
@@ -57,9 +54,12 @@ namespace kitchenview.Controls.ViewModels
         public AwesomeCalendarViewModel(IConfiguration configuration, IDataAccess<Appointment> dataAccess)
         {
             this.configuration = configuration;
-            this.icsData = dataAccess;
+            icsData = dataAccess;
 
             Appointments = new ObservableCollection<Appointment>();
+            var configurations = (configuration?.GetSection("Controls:Calendars:ICS:Appointments").Get<IEnumerable<AppointmentConfiguration>>()) ?? 
+                                    throw new ArgumentNullException("AppointmentConfiguration", "\"Controls:Calendars:ICS:Appointments\" is not configured cannot proceed!");
+            ConfigurationEntries = new ObservableCollection<AppointmentConfiguration>(configurations);
 
             LoadAppointments();
 
@@ -71,9 +71,7 @@ namespace kitchenview.Controls.ViewModels
             InitializeYear();
 
             if (Year is null)
-            {
                 throw new ArgumentNullException("Year", "Year was not properly initiated");
-            }
 
             int currentMonth = DateTime.Now.Month - 1;
             CurrentMonth = Year.ElementAt(currentMonth)?.Name ?? "";
