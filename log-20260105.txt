@@ -1,0 +1,50 @@
+2026-01-05 00:00:22.648 +01:00 [ERR] Error while parsing weather response into internal weather model
+System.InvalidOperationException: Cannot create instance of type 'System.String' because it has multiple public parameterized constructors.
+   at Microsoft.Extensions.Configuration.ConfigurationBinder.CreateInstance(Type type, IConfiguration config, BinderOptions options)
+   at Microsoft.Extensions.Configuration.ConfigurationBinder.BindInstance(Type type, BindingPoint bindingPoint, IConfiguration config, BinderOptions options)
+   at Microsoft.Extensions.Configuration.ConfigurationBinder.Get(IConfiguration configuration, Type type, Action`1 configureOptions)
+   at Microsoft.Extensions.Configuration.ConfigurationBinder.Get[T](IConfiguration configuration, Action`1 configureOptions)
+   at Microsoft.Extensions.Configuration.ConfigurationBinder.Get[T](IConfiguration configuration)
+   at kitchenview.DataAccess.WeatherDataAccess.GetData() in /home/cornyvanbeck/Documents/csharp_projects/d-generation/kitchenview/DataAccess/WeatherDataAccess.cs:line 36
+2026-01-05 00:01:01.130 +01:00 [ERR] Error while parsing weather response into internal weather model
+Newtonsoft.Json.JsonSerializationException: Error getting value from 'Hourly' on 'openmeteo_sdk.WeatherApiResponse'.
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at Google.FlatBuffers.Table.__offset(Int32 vtableOffset)
+   at openmeteo_sdk.WeatherApiResponse.get_Hourly()
+   at lambda_method1(Closure, Object)
+   at Newtonsoft.Json.Serialization.ExpressionValueProvider.GetValue(Object target)
+   --- End of inner exception stack trace ---
+   at Newtonsoft.Json.Serialization.ExpressionValueProvider.GetValue(Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CalculatePropertyDetails(JsonProperty property, JsonConverter& propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target, Boolean& useExistingValue, Object& currentValue, JsonContract& propertyContract, Boolean& gottenCurrentValue, Boolean& ignoredValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   at Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   at Newtonsoft.Json.JsonSerializer.Deserialize(JsonReader reader, Type objectType)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at kitchenview.DataAccess.WeatherDataAccess.GetData() in /home/cornyvanbeck/Documents/csharp_projects/d-generation/kitchenview/DataAccess/WeatherDataAccess.cs:line 56
+2026-01-05 00:04:31.923 +01:00 [ERR] Error while parsing weather response into internal weather model
+Newtonsoft.Json.JsonSerializationException: Error getting value from 'Hourly' on 'openmeteo_sdk.WeatherApiResponse'.
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at Google.FlatBuffers.Table.__offset(Int32 vtableOffset)
+   at openmeteo_sdk.WeatherApiResponse.get_Hourly()
+   at lambda_method1(Closure, Object)
+   at Newtonsoft.Json.Serialization.ExpressionValueProvider.GetValue(Object target)
+   --- End of inner exception stack trace ---
+   at Newtonsoft.Json.Serialization.ExpressionValueProvider.GetValue(Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CalculatePropertyDetails(JsonProperty property, JsonConverter& propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target, Boolean& useExistingValue, Object& currentValue, JsonContract& propertyContract, Boolean& gottenCurrentValue, Boolean& ignoredValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   at Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   at Newtonsoft.Json.JsonSerializer.Deserialize(JsonReader reader, Type objectType)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at kitchenview.DataAccess.WeatherDataAccess.GetData() in /home/cornyvanbeck/Documents/csharp_projects/d-generation/kitchenview/DataAccess/WeatherDataAccess.cs:line 56

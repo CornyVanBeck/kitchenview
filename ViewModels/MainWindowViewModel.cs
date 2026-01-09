@@ -17,6 +17,8 @@ namespace kitchenview.ViewModels
         private readonly DispatcherTimer _calendarTimer = new DispatcherTimer();
 
         private readonly DispatcherTimer _wordClockTimer = new DispatcherTimer();
+        private readonly DispatcherTimer _weatherClockTimer = new DispatcherTimer();
+
 
         private int _awesomeIndex;
 
@@ -44,42 +46,51 @@ namespace kitchenview.ViewModels
         {
             AwesomeIndex = 0;
             _calendarTimer.Tick += OnCalendarTick;
-            #if DEBUG
-            _calendarTimer.Interval = TimeSpan.FromSeconds(500);
-            #else
+#if DEBUG
+            _calendarTimer.Interval = TimeSpan.FromSeconds(5);
+#else
             _calendarTimer.Interval = configuration.GetValue<TimeSpan>("Controls:Calendars:ViewTimer");  
-            #endif          
+#endif
             _calendarTimer.Start();
 
-            _wordClockTimer.Tick += OnWordClockTick;
-            _wordClockTimer.Interval = configuration.GetValue<TimeSpan>("Controls:WordClock:ViewTimer");
+            //_wordClockTimer.Tick += OnWordClockTick;
+            //_wordClockTimer.Interval = configuration.GetValue<TimeSpan>("Controls:WordClock:ViewTimer");
+            _weatherClockTimer.Tick += OnWeatherTick;
+#if DEBUG
+            _weatherClockTimer.Interval = TimeSpan.FromSeconds(30);
+#else
+            _weatherClockTimer.Interval = configuration.GetValue<TimeSpan>("Controls:Weather:ViewTimer");  
+#endif
 
             this.configuration = configuration;
             var calendarService = Locator.Current.GetService<IDataAccess<Appointment>>();
+            var weatherService = Locator.Current.GetService<IDataAccess<Weather>>();
             //var quoteService = Locator.Current.GetService<IDataAccess<IQuote>>();
-            //var galleryService = Locator.Current.GetService<IDataAccess<PhotoprismImage>>();
-            //var shoppingListService = Locator.Current.GetService<IDataAccess<TodoistShoppingListEntry>>();
 
             AwesomeCalendar = new AwesomeCalendarViewModel(configuration, calendarService!);
-            AwesomeWordClock = new AwesomeWordClockViewModel(configuration);
-            AwesomeCountdown = new AwesomeCountdownViewModel(configuration);
+            AwesomeWeather = new AwesomeWeatherViewModel(configuration, weatherService!);
+            //AwesomeWordClock = new AwesomeWordClockViewModel(configuration);
             //Quote = new QuoteViewModel(configuration, quoteService!);
-            //AwesomeGallery = new AwesomeGalleryViewModel(configuration, galleryService!);
-            //AwesomeShoppingList = new AwesomeShoppingListViewModel(configuration, shoppingListService!);
-            //AwesomeWeather = new AwesomeWeatherViewModel();
         }
 
         private void OnCalendarTick(object? sender, EventArgs e)
         {
             AwesomeIndex = 1;
             _calendarTimer.Stop();
-            _wordClockTimer.Start();
+            _weatherClockTimer.Start();
         }
 
         private void OnWordClockTick(object? sender, EventArgs e)
         {
             AwesomeIndex = 0;
             _wordClockTimer.Stop();
+            _calendarTimer.Start();
+        }
+
+        private void OnWeatherTick(object? sender, EventArgs e)
+        {
+            AwesomeIndex = 0;
+            _weatherClockTimer.Stop();
             _calendarTimer.Start();
         }
     }
