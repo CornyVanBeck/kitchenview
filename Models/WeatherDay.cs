@@ -60,4 +60,6 @@ public class WeatherDay
     public WeatherCode WeatherCode;
 
     public int PrecipitationProbability;
+
+    public float Precipitation;
 }

@@ -115,6 +115,7 @@
 
 	<Style Selector="TextBlock.AppointmentTime">
 		<Setter Property="FontSize" Value="12" />
+		<Setter Property="FontFamily" Value="{StaticResource UbuntuRegularFont}" />
 		<Setter Property="Foreground" Value="#cdd6f4" />
 	</Style>
 
@@ -126,12 +127,14 @@
 
 	<Style Selector="TextBlock.AppointmentTitle">
 		<Setter Property="FontSize" Value="12" />
+		<Setter Property="FontFamily" Value="{StaticResource UbuntuRegularFont}" />
 		<Setter Property="Foreground" Value="#11111b" />
 	</Style>
 
 	<Style Selector="TextBlock.AppointmentTitle[IsEnabled=true]">
 		<Setter Property="FontSize" Value="12" />
 		<Setter Property="FontWeight" Value="Medium" />
+		<Setter Property="FontFamily" Value="{StaticResource UbuntuRegularFont}" />
 		<Setter Property="Foreground" Value="#11111b" />
 		<Setter Property="ZIndex" Value="-1" />
 		<Style.Animations>
@@ -157,6 +160,7 @@
 	<Style Selector="Panel.AppointmentConfiguration TextBlock">
 		<Setter Property="FontSize" Value="16" />
 		<Setter Property="FontWeight" Value="Medium" />
+		<Setter Property="FontFamily" Value="{StaticResource UbuntuRegularFont}" />
 		<Setter Property="Foreground" Value="#11111b" />
 		<Setter Property="Padding" Value="5 2 2 2" />
 	</Style>

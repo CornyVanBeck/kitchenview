@@ -37,7 +37,7 @@ namespace kitchenview.DataAccess
                 var weatherEndpoint = "https://api.open-meteo.com/v1/forecast?";
                 weatherEndpoint += $"latitude={latitude}&longitude={longitude}";
                 weatherEndpoint += "&timezone=Europe%2FBerlin&forecast_days=3&models=icon_seamless";
-                weatherEndpoint += "&hourly=temperature_2m,surface_pressure,windspeed_10m,winddirection_10m,weathercode,precipitation_probability";
+                weatherEndpoint += "&hourly=temperature_2m,surface_pressure,windspeed_10m,winddirection_10m,weathercode,precipitation,precipitation_probability";
 
                 if (weatherEndpoint is null)
                 {
@@ -93,26 +93,30 @@ namespace kitchenview.DataAccess
                 weatherData.Today.WindDirection = meteoData.Hourly.Winddirection_10m[currentDay.Hour] ?? -1;
                 weatherData.Today.WeatherCode = (WeatherCode)(meteoData.Hourly.Weathercode[currentDay.Hour] ?? -1);
                 weatherData.Today.PrecipitationProbability = meteoData.Hourly.Precipitation_probability[currentDay.Hour] ?? -1;
+                weatherData.Today.Precipitation = meteoData.Hourly.Precipitation[currentDay.Hour] ?? -1;
 
                 var temperatureChunks = meteoData.Hourly.Temperature_2m.Chunk(24);
                 var pressureChunks = meteoData.Hourly.Surface_pressure.Chunk(24);
                 var windSpeedChunks = meteoData.Hourly.Windspeed_10m.Chunk(24);
                 var windDirectionChunks = meteoData.Hourly.Winddirection_10m.Chunk(24);
                 var weatherCodeChunks = meteoData.Hourly.Weathercode.Chunk(24);
-                var precipitationProbability = meteoData.Hourly.Precipitation_probability.Chunk(24);
+                var precipitationProbabilityChunks = meteoData.Hourly.Precipitation_probability.Chunk(24);
+                var precipitationChunks = meteoData.Hourly.Precipitation.Chunk(24);
                 weatherData.Tomorrow.Temperature = temperatureChunks.ElementAt(1).Average() ?? -273.15f;
                 weatherData.Tomorrow.Pressure = pressureChunks.ElementAt(1).Average() ?? 0;
                 weatherData.Tomorrow.Windspeed = windSpeedChunks.ElementAt(1).Average() ?? -1;
                 weatherData.Tomorrow.WindDirection = Convert.ToInt32(windDirectionChunks.ElementAt(1).Average() ?? -1);
                 weatherData.Tomorrow.WeatherCode = (WeatherCode)(meteoData.Hourly.Weathercode[currentDay.Hour + 24] ?? -1);
-                weatherData.Tomorrow.PrecipitationProbability = Convert.ToInt32(precipitationProbability.ElementAt(1).Average() ?? -1);
+                weatherData.Tomorrow.PrecipitationProbability = Convert.ToInt32(precipitationProbabilityChunks.ElementAt(1).Average() ?? -1);
+                weatherData.Tomorrow.Precipitation = precipitationChunks.ElementAt(1).Average() ?? -273.15f;;
 
                 weatherData.DayAfterTomorrow.Temperature = temperatureChunks.ElementAt(2).Average() ?? -273.15f;
                 weatherData.DayAfterTomorrow.Pressure = pressureChunks.ElementAt(2).Average() ?? 0;
                 weatherData.DayAfterTomorrow.Windspeed = windSpeedChunks.ElementAt(2).Average() ?? -1;
                 weatherData.DayAfterTomorrow.WindDirection = Convert.ToInt32(windDirectionChunks.ElementAt(2).Average() ?? -1);
                 weatherData.DayAfterTomorrow.WeatherCode = (WeatherCode)(meteoData.Hourly.Weathercode[currentDay.Hour + 48] ?? -1);
-                weatherData.DayAfterTomorrow.PrecipitationProbability = Convert.ToInt32(precipitationProbability.ElementAt(2).Average() ?? -1);
+                weatherData.DayAfterTomorrow.PrecipitationProbability = Convert.ToInt32(precipitationProbabilityChunks.ElementAt(2).Average() ?? -1);
+                weatherData.DayAfterTomorrow.Precipitation = precipitationChunks.ElementAt(2).Average() ?? -273.15f;;
 
                 return new List<Weather>()
                 {
