@@ -11,10 +11,10 @@
     </Application.Styles>
 
     <Application.Resources>
-        <FontFamily x:Key="MeddonRegularFont">avares://kitchenview/Assets/Fonts/Meddon-Regular.ttf#Meddon</FontFamily>
         <FontFamily x:Key="UbuntuThinFont">avares://kitchenview/Assets/Fonts/Ubuntu-Th.ttf#Ubuntu</FontFamily>
         <FontFamily x:Key="UbuntuRegularFont">avares://kitchenview/Assets/Fonts/Ubuntu-Regular.ttf#Ubuntu</FontFamily>
         <FontFamily x:Key="SonoFont">avares://kitchenview/Assets/Fonts/Sono.ttf#Sono</FontFamily>
-        <FontFamily x:Key="AdventProFont">avares://kitchenview/Assets/Fonts/AdventPro.ttf#Advent Pro</FontFamily>
+        <FontFamily x:Key="MeteoconsFont">avares://kitchenview/Assets/Fonts/Meteocons.ttf#Meteocons</FontFamily>
+        <FontFamily x:Key="WeatherIconFont">avares://kitchenview/Assets/Fonts/weathericons-regular-webfont.ttf#Weather Icons</FontFamily>
     </Application.Resources>
 </Application>

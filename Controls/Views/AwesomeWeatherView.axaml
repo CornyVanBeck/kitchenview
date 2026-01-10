@@ -17,7 +17,7 @@
             <Border Classes="Today">
                 <StackPanel Orientation="Vertical">
                     <Panel Width="96" Height="96">
-                        <Image Source="{Binding CurrentWeatherCodeIcon}" />
+                        <TextBlock Classes="WeatherGlyphs" Text="{Binding CurrentWeatherCodeGlyph}" />
                     </Panel>
                     <TextBlock Text="{Binding CurrentWeatherCode}" />
                     <TextBlock Text="{Binding CurrentTemperature}" />
@@ -33,7 +33,7 @@
             <Border Classes="Tomorrow">
                 <StackPanel>
                     <Panel Width="96" Height="96">
-                        <Image Source="{Binding TomorrowWeatherCodeIcon}" Opacity="0.5"/>
+                        <TextBlock Classes="WeatherGlyphs" Text="{Binding TomorrowWeatherCodeGlyph}" IsEnabled="false" />
                     </Panel>
                     <TextBlock Text="{Binding TomorrowWeatherCode}" />
                     <TextBlock Text="{Binding TomorrowTemperature}" />
@@ -49,7 +49,7 @@
             <Border Classes="DayAfterTomorrow">
                 <StackPanel>
                     <Panel Width="96" Height="96">
-                        <Image Source="{Binding DayAfterTomorrowWeatherCodeIcon}" Opacity="0.5"/>
+                        <TextBlock Classes="WeatherGlyphs" Text="{Binding DayAfterTomorrowWeatherCodeGlyph}" IsEnabled="false" />
                     </Panel>
                     <TextBlock Text="{Binding DayAfterTomorrowWeatherCode}" />
                     <TextBlock Text="{Binding DayAfterTomorrowTemperature}" />

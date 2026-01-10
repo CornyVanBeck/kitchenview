@@ -286,9 +286,25 @@
 		<Setter Property="Foreground" Value="#a6adc8" />
 	</Style>
 
-	<Style Selector=" Panel.LastUpdatedInfo TextBlock">
+	<Style Selector="Panel.LastUpdatedInfo TextBlock">
 		<Setter Property="FontSize" Value="12" />
 		<Setter Property="Foreground" Value="#cdd6f4" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
+
+	<Style Selector="TextBlock.WeatherGlyphs">
+		<Setter Property="Foreground" Value="#cdd6f4" />
+		<Setter Property="FontSize" Value="82" />
+		<Setter Property="FontFamily" Value="{StaticResource WeatherIconFont}" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
+
+	<Style Selector="TextBlock.WeatherGlyphs[IsEnabled=false]">
+		<Setter Property="Foreground" Value="#6c7086" />
+		<Setter Property="FontSize" Value="82" />
+		<Setter Property="FontFamily" Value="{StaticResource WeatherIconFont}" />
 		<Setter Property="HorizontalAlignment" Value="Center" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 	</Style>
@@ -301,11 +317,5 @@
 
 	<Style Selector="TextBlock.WordClock[IsEnabled=true]">
 		<Setter Property="Foreground" Value="#cdd6f4" />
-	</Style>
-
-	<Style Selector="TextBlock.Countdown">
-		<Setter Property="Foreground" Value="#000" />
-		<Setter Property="FontSize" Value="120" />
-		<Setter Property="FontFamily" Value="{StaticResource AdventProFont}" />
 	</Style>
 </Styles>

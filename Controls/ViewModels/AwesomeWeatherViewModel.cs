@@ -66,12 +66,10 @@ namespace kitchenview.Controls.ViewModels
             set;
         }
 
-        private Bitmap? _currentWeatherCodeIcon;
-
-        public Bitmap? CurrentWeatherCodeIcon
+        public string? CurrentWeatherCodeGlyph
         {
-            get => _currentWeatherCodeIcon;
-            private set => this.RaiseAndSetIfChanged(ref _currentWeatherCodeIcon, value);
+            get;
+            set;
         }
 
         public string? TomorrowTemperature
@@ -110,12 +108,10 @@ namespace kitchenview.Controls.ViewModels
             set;
         }
 
-        private Bitmap? _tomorrowWeatherCodeIcon;
-
-        public Bitmap? TomorrowWeatherCodeIcon
+        public string? TomorrowWeatherCodeGlyph
         {
-            get => _tomorrowWeatherCodeIcon;
-            private set => this.RaiseAndSetIfChanged(ref _tomorrowWeatherCodeIcon, value);
+            get;
+            set;
         }
 
         public string? DayAfterTomorrowTemperature
@@ -154,12 +150,10 @@ namespace kitchenview.Controls.ViewModels
             set;
         }
 
-        private Bitmap? _dayAfterTomorrowWeatherCodeIcon;
-
-        public Bitmap? DayAfterTomorrowWeatherCodeIcon
+        public string? DayAfterTomorrowWeatherCodeGlyph
         {
-            get => _dayAfterTomorrowWeatherCodeIcon;
-            private set => this.RaiseAndSetIfChanged(ref _dayAfterTomorrowWeatherCodeIcon, value);
+            get;
+            set;
         }
         #endregion
 
@@ -182,9 +176,9 @@ namespace kitchenview.Controls.ViewModels
 
             LocationLabel = configuration.GetValue<string?>("Controls:Weather:Location:Label");
 
-            LoadCurrentWeatherIcon("./Assets/Weather/weather_icon-66.png").ConfigureAwait(false);
-            LoadTomorrowWeatherIcon("./Assets/Weather/weather_icon-66.png").ConfigureAwait(false);
-            LoadDayAfterTomorrowWeatherIcon("./Assets/Weather/weather_icon-66.png").ConfigureAwait(false);
+            CurrentWeatherCodeGlyph = "";
+            TomorrowWeatherCodeGlyph = "";
+            DayAfterTomorrowWeatherCodeGlyph = "";
 
             LoadWeatherData();
             LastUpdated = $"Zuletzt aktualisiert: {DateTime.Now:HH:mm}";
@@ -205,6 +199,9 @@ namespace kitchenview.Controls.ViewModels
                 return;
 
             var weatherData = parsedWeatherData.ElementAt(0);
+
+            LocationLabel += $" ({weatherData.Elevation} m.ü.M.)";
+
             CurrentTemperature = Math.Round(weatherData.Today.Temperature, 2) + " °C";
             TomorrowTemperature = Math.Round(weatherData.Tomorrow.Temperature, 2) + " °C";
             DayAfterTomorrowTemperature = Math.Round(weatherData.DayAfterTomorrow.Temperature, 2) + " °C";
@@ -247,9 +244,14 @@ namespace kitchenview.Controls.ViewModels
             OnPropertyChanged(nameof(TomorrowPrecipitationProbability));
             OnPropertyChanged(nameof(DayAfterTomorrowPrecipitationProbability));
 
-            LoadCurrentWeatherIcon(ConvertWeatherCodeIntoIcon(weatherData.Today.WeatherCode)).ConfigureAwait(false);
-            LoadTomorrowWeatherIcon(ConvertWeatherCodeIntoIcon(weatherData.Tomorrow.WeatherCode)).ConfigureAwait(false);
-            LoadDayAfterTomorrowWeatherIcon(ConvertWeatherCodeIntoIcon(weatherData.DayAfterTomorrow.WeatherCode)).ConfigureAwait(false);
+            CurrentWeatherCodeGlyph = ConvertWeatherCodeIntoGlyph(weatherData.Today.WeatherCode);
+            TomorrowWeatherCodeGlyph = ConvertWeatherCodeIntoGlyph(weatherData.Tomorrow.WeatherCode);
+            DayAfterTomorrowWeatherCodeGlyph = ConvertWeatherCodeIntoGlyph(weatherData.DayAfterTomorrow.WeatherCode);
+            OnPropertyChanged(nameof(CurrentWeatherCodeGlyph));
+            OnPropertyChanged(nameof(TomorrowWeatherCodeGlyph));
+            OnPropertyChanged(nameof(DayAfterTomorrowWeatherCodeGlyph));
+            //LoadTomorrowWeatherIcon(ConvertWeatherCodeIntoGlyph(weatherData.Tomorrow.WeatherCode)).ConfigureAwait(false);
+            //LoadDayAfterTomorrowWeatherIcon(ConvertWeatherCodeIntoGlyph(weatherData.DayAfterTomorrow.WeatherCode)).ConfigureAwait(false);
         }
 
         internal string ConvertDegreesIntoNautic(int windDegrees)
@@ -340,95 +342,68 @@ namespace kitchenview.Controls.ViewModels
             }
         }
 
-        internal string ConvertWeatherCodeIntoIcon(WeatherCode code)
+        internal string ConvertWeatherCodeIntoGlyph(WeatherCode code)
         {
             switch (code)
             {
                 case WeatherCode.CLEAR_SKY:
-                    return "./Assets/Weather/weather_icon-01.png";
+                    return "";
                 case WeatherCode.MAINLY_CLEAR:
-                    return "./Assets/Weather/weather_icon-17.png";
+                    return "";
                 case WeatherCode.PARTLY_CLOUDY:
-                    return "./Assets/Weather/weather_icon-17.png";
+                    return "";
                 case WeatherCode.OVERCAST:
-                    return "./Assets/Weather/weather_icon-16.png";
+                    return "";
                 case WeatherCode.FOG:
-                    return "./Assets/Weather/weather_icon-39.png";
+                    return "";
                 case WeatherCode.DEPOSITING_RIME_FOG:
-                    return "./Assets/Weather/weather_icon-66.png";
+                    return "";
                 case WeatherCode.DRIZZLE_LIGHT:
-                    return "./Assets/Weather/weather_icon-48.png";
+                    return "";
                 case WeatherCode.DRIZZLE_MODERATE:
-                    return "./Assets/Weather/weather_icon-66.png";
+                    return "";
                 case WeatherCode.DRIZZLE_DENSE:
-                    return "./Assets/Weather/weather_icon-45.png"; ;
+                    return ""; ;
                 case WeatherCode.FREEZING_DRIZZLE_LIGHT:
-                    return "./Assets/Weather/weather_icon-66.png";
+                    return "";
                 case WeatherCode.FREEZING_DRIZZLE_DENSE:
-                    return "./Assets/Weather/weather_icon-66.png";
+                    return "";
                 case WeatherCode.RAIN_SLIGHTLY:
-                    return "./Assets/Weather/weather_icon-19.png";
+                    return "";
                 case WeatherCode.RAIN_LIGHT:
-                    return "./Assets/Weather/weather_icon-22.png";
+                    return "";
                 case WeatherCode.RAIN_HEAVY:
-                    return "./Assets/Weather/weather_icon-36.png";
+                    return "";
                 case WeatherCode.FREEZING_RAIN_LIGHT:
-                    return "./Assets/Weather/weather_icon-66.png";
+                    return "";
                 case WeatherCode.FREEZING_RAIN_HEAVY:
-                    return "./Assets/Weather/weather_icon-66.png";
+                    return "";
                 case WeatherCode.SNOW_FALL_LIGHT:
-                    return "./Assets/Weather/weather_icon-32.png";
+                    return "";
                 case WeatherCode.SNOW_FALL_MODERATE:
-                    return "./Assets/Weather/weather_icon-31.png";
+                    return "";
                 case WeatherCode.SNOW_FALL_HEAVY:
-                    return "./Assets/Weather/weather_icon-31.png";
+                    return "";
                 case WeatherCode.SNOW_GRAINS:
-                    return "./Assets/Weather/weather_icon-68.png";
+                    return "";
                 case WeatherCode.RAIN_SHOWERS_SLIGHT:
-                    return "./Assets/Weather/weather_icon-19.png";
+                    return "";
                 case WeatherCode.RAIN_SHOWERS_MODERATE:
-                    return "./Assets/Weather/weather_icon-22.png";
+                    return "";
                 case WeatherCode.RAIN_SHOWERS_VIOLENT:
-                    return "./Assets/Weather/weather_icon-36.png";
+                    return "";
                 case WeatherCode.SNOW_SHOWERS_SLIGHT:
-                    return "./Assets/Weather/weather_icon-25.png";
+                    return "";
                 case WeatherCode.SNOW_SHOWERS_HEAVY:
-                    return "./Assets/Weather/weather_icon-31.png";
+                    return "";
                 case WeatherCode.THUNDERSTORM_SLIGHT:
-                    return "./Assets/Weather/weather_icon-28.png";
+                    return "";
                 case WeatherCode.THUNDERSTORM_SLIGHT_HAIL:
-                    return "./Assets/Weather/weather_icon-51.png";
+                    return "";
                 case WeatherCode.THUNDERSTORM_HEAVY_HAIL:
-                    return "./Assets/Weather/weather_icon-54.png";
+                    return "";
                 default:
-                    return "./Assets/Weather/weather_icon-66.png";
-            }
-        }
-
-        public async Task LoadCurrentWeatherIcon([NotNull] string url)
-        {
-            using (var imageStream = new MemoryStream(await File.ReadAllBytesAsync(url)))
-            {
-                CurrentWeatherCodeIcon = await Task.Run(() => Bitmap.DecodeToWidth(imageStream, 96));
-                OnPropertyChanged(nameof(CurrentWeatherCodeIcon));
-            }
-        }
-
-        public async Task LoadTomorrowWeatherIcon([NotNull] string url)
-        {
-            using (var imageStream = new MemoryStream(await File.ReadAllBytesAsync(url)))
-            {
-                TomorrowWeatherCodeIcon = await Task.Run(() => Bitmap.DecodeToWidth(imageStream, 96));
-                OnPropertyChanged(nameof(TomorrowWeatherCodeIcon));
-            }
-        }
-
-        public async Task LoadDayAfterTomorrowWeatherIcon([NotNull] string url)
-        {
-            using (var imageStream = new MemoryStream(await File.ReadAllBytesAsync(url)))
-            {
-                DayAfterTomorrowWeatherCodeIcon = await Task.Run(() => Bitmap.DecodeToWidth(imageStream, 96));
-                OnPropertyChanged(nameof(DayAfterTomorrowWeatherCodeIcon));
+                    return "";
             }
         }
 
